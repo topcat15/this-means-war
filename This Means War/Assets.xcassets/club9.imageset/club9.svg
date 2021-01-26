@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 376 525" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-8799.67,-2271.93)">
+        <g transform="matrix(1.69627,0,0,0.62539,-2978.45,0)">
+            <g transform="matrix(1.03214,0,0,1.599,6812.78,2275.41)">
+                <g transform="matrix(1.1579,0,0,2.61282,-2476.03,-509.658)">
+                    <g id="TEMP">
+                        <path id="Round-Transparent-Container" serif:id="Round Transparent Container" d="M2432.85,534.951C2432.85,526.677 2424.19,519.96 2413.53,519.96L2267.12,519.96C2256.46,519.96 2247.8,526.677 2247.8,534.951L2247.8,705.901C2247.8,714.175 2256.46,720.892 2267.12,720.892L2413.53,720.892C2424.19,720.892 2432.85,714.175 2432.85,705.901L2432.85,534.951Z" style="fill:none;"/>
+                        <clipPath id="_clip1">
+                            <path id="Round-Transparent-Container1" serif:id="Round Transparent Container" d="M2432.85,534.951C2432.85,526.677 2424.19,519.96 2413.53,519.96L2267.12,519.96C2256.46,519.96 2247.8,526.677 2247.8,534.951L2247.8,705.901C2247.8,714.175 2256.46,720.892 2267.12,720.892L2413.53,720.892C2424.19,720.892 2432.85,714.175 2432.85,705.901L2432.85,534.951Z"/>
+                        </clipPath>
+                        <g clip-path="url(#_clip1)">
+                            <path id="Border-and-25--white--overlay" serif:id="Border and 25% white  overlay" d="M2432.85,534.951C2432.85,526.677 2424.19,519.96 2413.53,519.96L2267.12,519.96C2256.46,519.96 2247.8,526.677 2247.8,534.951L2247.8,705.901C2247.8,714.175 2256.46,720.892 2267.12,720.892L2413.53,720.892C2424.19,720.892 2432.85,714.175 2432.85,705.901L2432.85,534.951Z" style="fill:white;stroke:black;stroke-width:1.28px;"/>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(3.10559,0,0,3.10559,-1530.25,-1721.47)">
+                    <g transform="matrix(0.302515,0,0,0.544388,-239.838,437.757)">
+                        <ellipse cx="2633.29" cy="885.212" rx="37.234" ry="36.307"/>
+                    </g>
+                    <g transform="matrix(0.302515,0,0,0.544388,-228.575,406.581)">
+                        <ellipse cx="2633.29" cy="885.212" rx="37.234" ry="36.307"/>
+                    </g>
+                    <g transform="matrix(0.302515,0,0,0.544388,-217.311,437.757)">
+                        <ellipse cx="2633.29" cy="885.212" rx="37.234" ry="36.307"/>
+                    </g>
+                    <g transform="matrix(0.655445,0,0,1.14294,-1086.34,-136.813)">
+                        <rect x="2517.11" y="899.101" width="13.893" height="30.522"/>
+                    </g>
+                    <g transform="matrix(0.571175,0,0,1,-896.748,4.02098)">
+                        <path d="M2564.51,921.283L2573.68,951.634L2555.34,951.634L2564.51,921.283Z"/>
+                    </g>
+                    <g transform="matrix(-0.571175,0.00060875,-0.000347703,-1,2033.15,1873.26)">
+                        <path d="M2564.51,921.283L2573.68,951.634L2555.34,951.634L2564.51,921.283Z"/>
+                    </g>
+                </g>
+                <g transform="matrix(0.571175,0,0,1,-900.529,484.788)">
+                    <text x="1952.64px" y="661.523px" style="font-family:'AmericanTypewriter', 'American Typewriter', serif;font-size:104.667px;fill:rgb(235,235,235);">9</text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

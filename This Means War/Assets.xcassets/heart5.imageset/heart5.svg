@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 376 525" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-6628.64,-169.355)">
+        <g transform="matrix(1.69627,0,0,0.62539,-2978.45,0)">
+            <g transform="matrix(1.03214,0,0,1.599,5532.89,-1086.6)">
+                <g transform="matrix(1.1579,0,0,2.61282,-2476.03,-509.658)">
+                    <g id="TEMP">
+                        <path id="Round-Transparent-Container" serif:id="Round Transparent Container" d="M2432.85,534.951C2432.85,526.677 2424.19,519.96 2413.53,519.96L2267.12,519.96C2256.46,519.96 2247.8,526.677 2247.8,534.951L2247.8,705.901C2247.8,714.175 2256.46,720.892 2267.12,720.892L2413.53,720.892C2424.19,720.892 2432.85,714.175 2432.85,705.901L2432.85,534.951Z" style="fill:none;"/>
+                        <clipPath id="_clip1">
+                            <path id="Round-Transparent-Container1" serif:id="Round Transparent Container" d="M2432.85,534.951C2432.85,526.677 2424.19,519.96 2413.53,519.96L2267.12,519.96C2256.46,519.96 2247.8,526.677 2247.8,534.951L2247.8,705.901C2247.8,714.175 2256.46,720.892 2267.12,720.892L2413.53,720.892C2424.19,720.892 2432.85,714.175 2432.85,705.901L2432.85,534.951Z"/>
+                        </clipPath>
+                        <g clip-path="url(#_clip1)">
+                            <path id="Border-and-25--white--overlay" serif:id="Border and 25% white  overlay" d="M2432.85,534.951C2432.85,526.677 2424.19,519.96 2413.53,519.96L2267.12,519.96C2256.46,519.96 2247.8,526.677 2247.8,534.951L2247.8,705.901C2247.8,714.175 2256.46,720.892 2267.12,720.892L2413.53,720.892C2424.19,720.892 2432.85,714.175 2432.85,705.901L2432.85,534.951Z" style="fill:none;stroke:black;stroke-width:1.28px;"/>
+                            <g transform="matrix(1.73712,0,0,1.42003,-2036.92,-454.438)">
+                                <path d="M2519.82,733.852C2527.89,719.298 2544.03,719.298 2552.11,726.575C2560.18,733.852 2560.18,748.406 2552.11,762.96C2546.46,773.876 2531.93,784.791 2519.82,792.068C2507.72,784.791 2493.19,773.876 2487.54,762.96C2479.47,748.406 2479.47,733.852 2487.54,726.575C2495.61,719.298 2511.75,719.298 2519.82,733.852Z" style="fill:rgb(212,16,16);"/>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(0.571175,0,0,1,-900.888,483.846)">
+                    <text x="1952.64px" y="661.523px" style="font-family:'AmericanTypewriter', 'American Typewriter', serif;font-size:104.667px;">5</text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

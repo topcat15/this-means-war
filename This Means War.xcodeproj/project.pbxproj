@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		2151A18B25C0C9CD002902F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A18A25C0C9CD002902F6 /* AppDelegate.swift */; };
 		2151A18D25C0C9CD002902F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A18C25C0C9CD002902F6 /* SceneDelegate.swift */; };
-		2151A18F25C0C9CD002902F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A18E25C0C9CD002902F6 /* ViewController.swift */; };
 		2151A19225C0C9CD002902F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2151A19025C0C9CD002902F6 /* Main.storyboard */; };
 		2151A19425C0C9D0002902F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2151A19325C0C9D0002902F6 /* Assets.xcassets */; };
 		2151A19725C0C9D0002902F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2151A19525C0C9D0002902F6 /* LaunchScreen.storyboard */; };
+		2151A1A025C0CBAF002902F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A19F25C0CBAF002902F6 /* ViewController.swift */; };
+		2151A1A825C0CC21002902F6 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A1A725C0CC21002902F6 /* CardModel.swift */; };
+		2151A1AB25C0CC3F002902F6 /* DeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A1AA25C0CC3F002902F6 /* DeckModel.swift */; };
+		2151A1AE25C0CC70002902F6 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A1AD25C0CC70002902F6 /* GameLogic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2151A18725C0C9CD002902F6 /* This Means War.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "This Means War.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2151A18A25C0C9CD002902F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2151A18C25C0C9CD002902F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2151A18E25C0C9CD002902F6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2151A19125C0C9CD002902F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2151A19325C0C9D0002902F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2151A19625C0C9D0002902F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2151A19825C0C9D0002902F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2151A19F25C0CBAF002902F6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2151A1A725C0CC21002902F6 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
+		2151A1AA25C0CC3F002902F6 /* DeckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckModel.swift; sourceTree = "<group>"; };
+		2151A1AD25C0CC70002902F6 /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +64,10 @@
 			children = (
 				2151A18A25C0C9CD002902F6 /* AppDelegate.swift */,
 				2151A18C25C0C9CD002902F6 /* SceneDelegate.swift */,
-				2151A18E25C0C9CD002902F6 /* ViewController.swift */,
+				2151A1A725C0CC21002902F6 /* CardModel.swift */,
+				2151A1AA25C0CC3F002902F6 /* DeckModel.swift */,
+				2151A1AD25C0CC70002902F6 /* GameLogic.swift */,
+				2151A19F25C0CBAF002902F6 /* ViewController.swift */,
 				2151A19025C0C9CD002902F6 /* Main.storyboard */,
 				2151A19325C0C9D0002902F6 /* Assets.xcassets */,
 				2151A19525C0C9D0002902F6 /* LaunchScreen.storyboard */,
@@ -137,8 +146,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2151A18F25C0C9CD002902F6 /* ViewController.swift in Sources */,
+				2151A1AE25C0CC70002902F6 /* GameLogic.swift in Sources */,
 				2151A18B25C0C9CD002902F6 /* AppDelegate.swift in Sources */,
+				2151A1AB25C0CC3F002902F6 /* DeckModel.swift in Sources */,
+				2151A1A825C0CC21002902F6 /* CardModel.swift in Sources */,
+				2151A1A025C0CBAF002902F6 /* ViewController.swift in Sources */,
 				2151A18D25C0C9CD002902F6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
