@@ -72,7 +72,7 @@ class Deck {
 
     init() {
         
-//        createCards()
+        createCards()
         
     }
 
