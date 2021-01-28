@@ -7,18 +7,11 @@
 
 import Foundation
 
-// Game Start
-
-// Initial player scores
-var player1Score = 0
-var player2Score = 0
-
-// Initial deal of 52 cards, shuffled
-
 class GameLogic {
     
-    public var player1Score = 0
-    public var player2Score = 0
+    // Player score = number of cards in player deck
+//    public var player1Score = player1deck.count
+//    public var player2Score = player2deck.count
     private var deck: Deck?
     private var player1Deck = [Card]()
     private var player2Deck = [Card]()
@@ -27,17 +20,41 @@ class GameLogic {
     init(){
         
         self.deck = Deck()
-        self.deck?.shuffle()
-        self.deck?.viewDeck()
-        
-        // loop that iterates 26 times
-        
-        
-        // each iteration add a card to each of the player decks
-     
-        
         
     }
+    
+    
+    
+    
+    
+    
+
+    
+    // Who wins is decided by whose battle card has a higher value
+    
+        // If a player wins a normal round, their score increases by one, as they have a gained a card from the opposing player
+    
+    // If the battle cards have the same value, then we enter the war state
+    
+        // WAR
+        
+            // Each player places one card face down and another face up
+        
+            // If the two face up cards have different values, the one with the higher value wins
+        
+                // The winner's score is increased by 2 * the number of rounds of war
+        
+            // War ends when  depends on the value of the face up card
+            
+                // If the values match again, then a second round of War commences
+        
+                
+        
+            // Whoever wins will have t
+    
+    
+    
+    
     
 //    func deal() -> [Card]? {
 //

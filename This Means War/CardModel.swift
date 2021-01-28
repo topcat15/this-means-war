@@ -24,20 +24,30 @@ enum Suit : CaseIterable {
 // Create a model for a given card in a standard 52-card deck
 class Card : Deck {
      
-    var backImage = "back"
     var suit:Suit
     var value:CardValue.RawValue
-    var frontImage:String {
-        return "\(suit)"+"\(value)"
+    var faceUp = false
+    var image:String {
+        if faceUp == false {
+            return "back"
+        }
+        else {
+            // Front Image
+            return "\(suit)"+"\(value)"
+        }
     }
-    
-    // face up or down
-    // flip to innvert state
+    var isInBattlePosition = false
     
     init (suit: Suit, value: CardValue.RawValue) {
         
         self.value = value
         self.suit = suit
+        
+    }
+    
+    func flip() {
+        
+        faceUp.toggle()
         
     }
     

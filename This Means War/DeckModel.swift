@@ -21,7 +21,7 @@ class Deck {
     // Store the deck
     private var deckArray = [Card]()
 
-    // Create a new Card object for the 13 possible cards for the 4 suits
+    // Create a deck of cards
     private func createCards() {
         
         // Create a set of all possible card values for each possible suit
@@ -42,37 +42,52 @@ class Deck {
     }
         
     // Shuffle the deck
-    func shuffle() {
+    private func shuffle() {
         
         deckArray = deckArray.shuffled()
         
     }
     
-    // Check that frontImage is being set properly, and that deck is being shuffled
+    // Test: Check the array
     func viewDeck() {
 
         deckArray.forEach() {
-            print($0.frontImage)
+            print($0.suit, $0.value)
         }
 
     }
     
-    func deal() -> Card? {
+    private func deal() {
         
-        if deckArray.count > 0 {
+        var player1Deck = [Card]()
+        var player2Deck = [Card]()
+        
+        for (index, card) in deckArray.enumerated() {
             
-            let card = deckArray.first
-            deckArray.remove(at: 0)
-            return card
+            // 0-indexed, so 0- and even-indexed cards go to player1, odd-indexed cards go to player2
+            index % 2 == 0 ? player1Deck.append(card) : player2Deck.append(card)
             
         }
         
-        return nil
-    }
+        // Empty the deck once ir has been dealt
+        deckArray.removeAll()
+        
+            // Test: Check that player decks are populated with the correct cards
+            for (index, card) in player1Deck.enumerated() {
+                print(index, card.suit, card.value)
+            }
+            
+            for (index, card) in player2Deck.enumerated() {
+                print(index, card.suit, card.value)
+            }
 
+    }
+    
     init() {
         
         createCards()
+        shuffle()
+        deal()
         
     }
 
