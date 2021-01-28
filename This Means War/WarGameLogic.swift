@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GameLogic {
+class WarGameLogic {
     
     private var deck:Deck?
     public var player1Score:Int
@@ -34,21 +34,35 @@ class GameLogic {
         self.player1Deck = drawPilePlayer1 + healPilePlayer1
         self.player2Deck = drawPilePlayer2 + healPilePlayer2
         self.checkDrawIsEmpty()
-        
     }
     
     // The Battle Field
     var battlePosition1 = [Card]()
     var battlePosition2 = [Card]()
     
-    func moveToBattleField() {
+    // TODO: create func that encapsulates move cards from one array to another
+    
+    private func moveCards(from: inout [Card], to: inout [Card]) {
+        
+        guard let card = from.first else {
+            return
+        }
+        // Add cards to battle position
+        to.append(card)
+        // Remove the cards from the draw pile arrays
+        from.removeFirst()
+        
+    }
+    
+    private func moveToBattleField() {
         
         // First, check to see if there is a winner
-        checkWinner()
+        // TODO: check if game over is bool value
+        checkGameOver()
         
         // Place the top card from players' decks into the corresponding battle positions
-        battlePosition1.append(drawPilePlayer1.first!)
-        battlePosition2.append(drawPilePlayer2.first!)
+        moveCards(from: &drawPilePlayer1, to: &battlePosition1)
+        moveCards(from: &drawPilePlayer2, to: &battlePosition2)
          
         for (index, _) in battlePosition1.enumerated() {
         
@@ -57,7 +71,6 @@ class GameLogic {
                 
                 battlePosition1[index].faceUp = true
                 battlePosition2[index].faceUp = true
-                
             }
             // Do not flip over any card in an odd-indexed position in the battlePosition arrays
             else {
@@ -66,71 +79,89 @@ class GameLogic {
             }
         }
         
-        // Remove the cards from the draw pile arrays
-        drawPilePlayer1.removeFirst()
-        drawPilePlayer2.removeFirst()
-        
         // Every time we move a card onto the battle field, check if the draw piles are empty afterward
         checkDrawIsEmpty()
         
         // TODO: what if you only have one card left?...then your drawpile is empty and so is your heal pile...can we append nothing to an array and it just doesn't break?
-
     }
     
-    // Battle - determine who wins
+    // Determines where the cards end up during a battle (who wins)
+    private func moveToHealPile() {
+        
+        // Cards moved into the heal piles will be turned face up
+        func flipWhenMovedToHealPile() {
+            
+            battlePosition1.forEach {
+                
+                $0.faceUp = true
+            }
+            
+            battlePosition2.forEach {
+                
+                $0.faceUp = true
+            }
+        }
+        
+        if battlePosition1.last!.value > battlePosition2.last!.value {
+        
+            flipWhenMovedToHealPile()
+            
+            // Add cards to player 1's heal pile
+            healPilePlayer1.append(contentsOf: battlePosition1)
+            healPilePlayer1.append(contentsOf: battlePosition2)
+            
+            battlePosition1.removeAll()
+            battlePosition2.removeAll()
+        }
+        else if battlePosition1.last!.value < battlePosition2.last!.value {
+            
+            flipWhenMovedToHealPile()
+            
+            // Add cards to player 2's heal pile
+            healPilePlayer2.append(contentsOf: battlePosition1)
+            healPilePlayer2.append(contentsOf: battlePosition2)
+            
+            battlePosition1.removeAll()
+            battlePosition2.removeAll()
+        }
+    }
+
+    // Battle - control movement of cards, handle War condition
     func battle() {
         
         repeat {
             
-            // Before each round we should check for a winner
-            checkWinner()
+            // Before each round we should check for a game winner
+            checkGameOver()
             
             // First, check to see if we are at war
             if battlePosition1.count > 1 {
                 
+                // Move two cards to the Battle Field
                 moveToBattleField()
                 moveToBattleField()
-                
+                // Determine a winner or if we are still at War
+                moveToHealPile()
             }
             
             // Second, check to make sure Battle Field is not empty (otherwise you cannot battle)
             else if battlePosition1.count > 0 && battlePosition2.count > 0 {
                 
                 moveToBattleField()
-                
-                if battlePosition1.last!.value > battlePosition2.last!.value {
-                
-                    // Add cards to player 1's heal pile
-                    healPilePlayer1.append(contentsOf: battlePosition1)
-                    healPilePlayer1.append(contentsOf: battlePosition2)
-                    
-                    battlePosition1.removeAll()
-                    battlePosition1.removeAll()
-                
-                }
-                else if battlePosition1.last!.value < battlePosition2.last!.value {
-                    
-                    // Add cards to player 2's heal pile
-                    healPilePlayer2.append(contentsOf: battlePosition1)
-                    healPilePlayer2.append(contentsOf: battlePosition2)
-                    
-                    battlePosition1.removeAll()
-                    battlePosition1.removeAll()
-                    
-                }
-                
+                moveToHealPile()
             }
-            
         } while battlePosition1.last!.value == battlePosition2.last!.value
+        // If we are still at War, the while condition is still true. so the code is repeated
     }
 
     // When a draw pile is empty, the heal pile is shuffled and then transferred to the draw pile
-    func checkDrawIsEmpty() {
+    private func checkDrawIsEmpty() {
         
         let drawCountPlayer1 = drawPilePlayer1.count
         let drawCountPlayer2 = drawPilePlayer2.count
         
         // For player 1
+        // TODO: make if statement instead
         switch drawCountPlayer1 {
         
         case 0:
@@ -141,8 +172,7 @@ class GameLogic {
         
         default:
             
-            drawIsEmptyPlayer1 = false
-        
+            drawIsEmptyPlayer1 = false        
         }
         
         // For player 2
@@ -157,12 +187,10 @@ class GameLogic {
         default:
             
             drawIsEmptyPlayer2 = false
-        
         }
-        
     }
     
-    func checkWinner() {
+    private func checkGameOver() {
         
         if player1Deck.count == 0 {
             
@@ -179,5 +207,3 @@ class GameLogic {
     }
     
 }
-
-

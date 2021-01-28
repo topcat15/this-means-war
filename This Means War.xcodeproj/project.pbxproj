@@ -15,7 +15,7 @@
 		2151A1A025C0CBAF002902F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A19F25C0CBAF002902F6 /* ViewController.swift */; };
 		2151A1A825C0CC21002902F6 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A1A725C0CC21002902F6 /* CardModel.swift */; };
 		2151A1AB25C0CC3F002902F6 /* DeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A1AA25C0CC3F002902F6 /* DeckModel.swift */; };
-		2151A1AE25C0CC70002902F6 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A1AD25C0CC70002902F6 /* GameLogic.swift */; };
+		2151A1AE25C0CC70002902F6 /* WarGameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A1AD25C0CC70002902F6 /* WarGameLogic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 		2151A19F25C0CBAF002902F6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2151A1A725C0CC21002902F6 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		2151A1AA25C0CC3F002902F6 /* DeckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckModel.swift; sourceTree = "<group>"; };
-		2151A1AD25C0CC70002902F6 /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
+		2151A1AD25C0CC70002902F6 /* WarGameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarGameLogic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 				2151A18C25C0C9CD002902F6 /* SceneDelegate.swift */,
 				2151A1A725C0CC21002902F6 /* CardModel.swift */,
 				2151A1AA25C0CC3F002902F6 /* DeckModel.swift */,
-				2151A1AD25C0CC70002902F6 /* GameLogic.swift */,
+				2151A1AD25C0CC70002902F6 /* WarGameLogic.swift */,
 				2151A19F25C0CBAF002902F6 /* ViewController.swift */,
 				2151A19025C0C9CD002902F6 /* Main.storyboard */,
 				2151A19325C0C9D0002902F6 /* Assets.xcassets */,
@@ -146,7 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2151A1AE25C0CC70002902F6 /* GameLogic.swift in Sources */,
+				2151A1AE25C0CC70002902F6 /* WarGameLogic.swift in Sources */,
 				2151A18B25C0C9CD002902F6 /* AppDelegate.swift in Sources */,
 				2151A1AB25C0CC3F002902F6 /* DeckModel.swift in Sources */,
 				2151A1A825C0CC21002902F6 /* CardModel.swift in Sources */,

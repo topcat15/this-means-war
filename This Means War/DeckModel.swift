@@ -9,13 +9,6 @@ import Foundation
 
 // Create a standard 52-card deck from the Card object
 
-protocol CardProtocols {
-
-    func createCards() -> [Card]
-    func shuffle()
-    
-}
-
 class Deck {
     
     // Store the deck
@@ -33,8 +26,7 @@ class Deck {
                 let card = Card(suit: suit, value: value.rawValue)
                 card.value = value.rawValue
                 card.suit = suit
-                deckArray.append(card)
-                
+                deckArray.append(card)                
             }
         }
     }
@@ -43,7 +35,6 @@ class Deck {
     private func shuffle() {
         
         deckArray = deckArray.shuffled()
-        
     }
     
     // Test: Check the array
@@ -54,6 +45,7 @@ class Deck {
         }
     }
     
+    // TODO: 
     var player1Deck = [Card]()
     var player2Deck = [Card]()
     
@@ -64,7 +56,6 @@ class Deck {
             
             // 0-indexed, so 0- and even-indexed cards go to player1, odd-indexed cards go to player2
             index % 2 == 0 ? player1Deck.append(card) : player2Deck.append(card)
-            
         }
         
         // Empty the deck once it has been dealt
@@ -85,6 +76,5 @@ class Deck {
         createCards()
         shuffle()
         deal()
-        
     }
 }

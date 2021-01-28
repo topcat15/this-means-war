@@ -11,14 +11,12 @@ import Foundation
 enum CardValue: Int, CaseIterable {
     
     case two = 2, three, four, five, six, seven, eight, nine, ten, jack, queen, king, ace
-    
 }
 
 // Set possible suit values
 enum Suit : CaseIterable {
     
     case club, diamond, heart, spade
-    
 }
 
 // Create a model for a given card in a standard 52-card deck
@@ -36,7 +34,6 @@ class Card : Deck {
             return "\(suit)"+"\(value)"
         }
     }
-    var isInBattleField = false
     
     init (suit: Suit, value: CardValue.RawValue) {
         
@@ -44,12 +41,5 @@ class Card : Deck {
         self.suit = suit
         
     }
-    
-    func flip() {
-        
-        faceUp.toggle()
-        
-    }
-    
 }
 
