@@ -36,7 +36,7 @@ class Card : Deck {
             return "\(suit)"+"\(value)"
         }
     }
-    var isInBattlePosition = false
+    var isInBattleField = false
     
     init (suit: Suit, value: CardValue.RawValue) {
         

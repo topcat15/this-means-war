@@ -36,9 +36,7 @@ class Deck {
                 deckArray.append(card)
                 
             }
-
         }
-
     }
         
     // Shuffle the deck
@@ -54,13 +52,13 @@ class Deck {
         deckArray.forEach() {
             print($0.suit, $0.value)
         }
-
     }
     
+    var player1Deck = [Card]()
+    var player2Deck = [Card]()
+    
+    // Deal the deck to two players, one at a time
     private func deal() {
-        
-        var player1Deck = [Card]()
-        var player2Deck = [Card]()
         
         for (index, card) in deckArray.enumerated() {
             
@@ -69,18 +67,17 @@ class Deck {
             
         }
         
-        // Empty the deck once ir has been dealt
+        // Empty the deck once it has been dealt
         deckArray.removeAll()
         
-            // Test: Check that player decks are populated with the correct cards
-            for (index, card) in player1Deck.enumerated() {
-                print(index, card.suit, card.value)
-            }
-            
-            for (index, card) in player2Deck.enumerated() {
-                print(index, card.suit, card.value)
-            }
-
+        // Test: Check that player decks are populated with the correct cards
+        for (index, card) in player1Deck.enumerated() {
+            print(index, card.suit, card.value)
+        }
+        
+        for (index, card) in player2Deck.enumerated() {
+            print(index, card.suit, card.value)
+        }
     }
     
     init() {
@@ -90,5 +87,4 @@ class Deck {
         deal()
         
     }
-
 }

@@ -9,25 +9,64 @@ import Foundation
 
 class GameLogic {
     
-    // Player score = number of cards in player deck
-//    public var player1Score = player1deck.count
-//    public var player2Score = player2deck.count
-    private var deck: Deck?
-    private var player1Deck = [Card]()
-    private var player2Deck = [Card]()
+    private var deck:Deck?
+    public var player1Score:Int
+    public var player2Score:Int
     private var atWar = false
     
-    init(){
+    init() {
         
         self.deck = Deck()
+        // Player score = number of cards in player deck
+        self.player1Score = deck!.player1Deck.count
+        self.player2Score = deck!.player2Deck.count
+        
+    }
+
+    // The Battle Field
+    
+    var battlePosition1:Card?
+    var battlePosition2:Card?
+    
+    // Place the top card from players' decks into the corresponding battle positions
+    func moveToBattleField() {
+        
+        for (index, card) in deck!.player1Deck.enumerated() {
+            
+            if index == 0 {
+                
+                battlePosition1 = card
+                card.flip()
+                
+            }
+            else {
+                return
+            }
+            
+            // Remove card from player's deck
+            deck!.player1Deck.remove(at: 0)
+        }
+        
+        for (index, card) in deck!.player1Deck.enumerated() {
+            
+            if index == 0 {
+                
+                battlePosition2 = card
+                card.flip()
+                
+            }
+            else {
+                return
+            }
+            
+            deck!.player2Deck.remove(at: 0)
+        }
+        
         
     }
     
     
-    
-    
-    
-    
+
 
     
     // Who wins is decided by whose battle card has a higher value
@@ -90,11 +129,6 @@ class GameLogic {
 //    }
     
 }
-
-
-
-// Split deck into two
-
 
 
 
