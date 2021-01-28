@@ -16,18 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hf3-D9-ZUv">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="IF2-BZ-ucM">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Hf3-D9-ZUv" secondAttribute="trailing" id="ECX-yU-lY5"/>
-                            <constraint firstItem="Hf3-D9-ZUv" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="SaM-fF-MG7"/>
-                            <constraint firstAttribute="bottom" secondItem="Hf3-D9-ZUv" secondAttribute="bottom" id="fx2-CI-OAX"/>
-                            <constraint firstItem="Hf3-D9-ZUv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mHv-nQ-AEs"/>
+                            <constraint firstItem="IF2-BZ-ucM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4aH-ut-hUx"/>
+                            <constraint firstAttribute="bottom" secondItem="IF2-BZ-ucM" secondAttribute="bottom" id="7Bt-A9-tCr"/>
+                            <constraint firstItem="IF2-BZ-ucM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ABC-Q3-Hbf"/>
+                            <constraint firstAttribute="trailing" secondItem="IF2-BZ-ucM" secondAttribute="trailing" id="tKt-Xt-8Dc"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -37,6 +36,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Background" width="414" height="896"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
