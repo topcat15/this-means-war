@@ -72,5 +72,19 @@ class ViewController: UIViewController {
 //        player2ScoreLabel.text = String(player2Score)
 //
 //    }
+ 
+    
+    // Draw Pile
+
+        // No cards appear in discard pile when it is empty
+
+        // OPTIONAL: show outline on board where discard pile goes
+
+    // Heal Pile
+
+        // No cards appear in discard pile when it is empty
+
+        // OPTIONAL: show outline on board where discard pile goes
+    
     
 }

@@ -41,9 +41,12 @@ class GameLogic {
     var battlePosition1 = [Card]()
     var battlePosition2 = [Card]()
     
-    // Place the top card from players' decks into the corresponding battle positions
     func moveToBattleField() {
         
+        // First, check to see if there is a winner
+        checkWinner()
+        
+        // Place the top card from players' decks into the corresponding battle positions
         battlePosition1.append(drawPilePlayer1.first!)
         battlePosition2.append(drawPilePlayer2.first!)
          
@@ -69,6 +72,8 @@ class GameLogic {
         
         // Every time we move a card onto the battle field, check if the draw piles are empty afterward
         checkDrawIsEmpty()
+        
+        // TODO: what if you only have one card left?...then your drawpile is empty and so is your heal pile...can we append nothing to an array and it just doesn't break?
 
     }
     
@@ -76,6 +81,9 @@ class GameLogic {
     func battle() {
         
         repeat {
+            
+            // Before each round we should check for a winner
+            checkWinner()
             
             // First, check to see if we are at war
             if battlePosition1.count > 1 {
@@ -157,63 +165,19 @@ class GameLogic {
     func checkWinner() {
         
         if player1Deck.count == 0 {
+            
             print("PLAYER 2 WINS!!!!!")
+            
         }
-        else {
-            print("PLAYER 1 WINS!!!!!")
+        
+        if player2Deck.count == 0 {
+            
+            print("PLAYER 2 WINS!!!!!")
+            
         }
+        
     }
-                
-    
-    
-//    func deal() -> [Card]? {
-//
-//        if atWar {
-//            // deal three cards face up, one down
-//
-//            // determine who wins
-//
-//
-//        }
-//        else {
-//
-//            // pull a card off of player 1's deck, add it to the return array....repeat for player 2
-//
-//            // if player1deck.count is > 0 && player2deck.count is > 0, now we know there is enough ......if NOT, then we cannot perform the deal function and we returnn nil (GAME OVER)
-//
-//                // if the cards match then we are in the war state
-//
-//                    // else normal round, score the round
-//                    // score player1 score player2
-//
-//
-//                // return cards
-//
-//
-//            // else return nil
-//
-//        }
-//
-//
-//
-//    }
     
 }
 
 
-// Draw Pile
-
-    // No cards appear in discard pile when it is empty
-
-    // OPTIONAL: show outline on board where discard pile goes
-
-// Heal Pile
-
-    // No cards appear in discard pile when it is empty
-
-    // OPTIONAL: show outline on board where discard pile goes
-
-
-// TODO: When a player's draw pile is empty, shuffle their discard pile and make it their deck
-
-// TODO: Win condition - a player wins when the other player has no more cards to draw

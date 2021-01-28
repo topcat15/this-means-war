@@ -16,8 +16,6 @@
 		2151A1A825C0CC21002902F6 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A1A725C0CC21002902F6 /* CardModel.swift */; };
 		2151A1AB25C0CC3F002902F6 /* DeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A1AA25C0CC3F002902F6 /* DeckModel.swift */; };
 		2151A1AE25C0CC70002902F6 /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A1AD25C0CC70002902F6 /* GameLogic.swift */; };
-		2151A1B225C23229002902F6 /* BattleFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A1B125C23229002902F6 /* BattleFieldModel.swift */; };
-		2151A1B625C2375D002902F6 /* PlayerDeckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151A1B525C2375D002902F6 /* PlayerDeckModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,8 +30,6 @@
 		2151A1A725C0CC21002902F6 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		2151A1AA25C0CC3F002902F6 /* DeckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckModel.swift; sourceTree = "<group>"; };
 		2151A1AD25C0CC70002902F6 /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
-		2151A1B125C23229002902F6 /* BattleFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleFieldModel.swift; sourceTree = "<group>"; };
-		2151A1B525C2375D002902F6 /* PlayerDeckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDeckModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,8 +66,6 @@
 				2151A18C25C0C9CD002902F6 /* SceneDelegate.swift */,
 				2151A1A725C0CC21002902F6 /* CardModel.swift */,
 				2151A1AA25C0CC3F002902F6 /* DeckModel.swift */,
-				2151A1B525C2375D002902F6 /* PlayerDeckModel.swift */,
-				2151A1B125C23229002902F6 /* BattleFieldModel.swift */,
 				2151A1AD25C0CC70002902F6 /* GameLogic.swift */,
 				2151A19F25C0CBAF002902F6 /* ViewController.swift */,
 				2151A19025C0C9CD002902F6 /* Main.storyboard */,
@@ -156,8 +150,6 @@
 				2151A18B25C0C9CD002902F6 /* AppDelegate.swift in Sources */,
 				2151A1AB25C0CC3F002902F6 /* DeckModel.swift in Sources */,
 				2151A1A825C0CC21002902F6 /* CardModel.swift in Sources */,
-				2151A1B225C23229002902F6 /* BattleFieldModel.swift in Sources */,
-				2151A1B625C2375D002902F6 /* PlayerDeckModel.swift in Sources */,
 				2151A1A025C0CBAF002902F6 /* ViewController.swift in Sources */,
 				2151A18D25C0C9CD002902F6 /* SceneDelegate.swift in Sources */,
 			);
