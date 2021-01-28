@@ -127,13 +127,13 @@ class GameLogic {
         
         case 0:
             
-            drawIsEmpty = true
+            drawIsEmptyPlayer1 = true
             drawPilePlayer1.append(contentsOf: healPilePlayer1.shuffled())
             healPilePlayer1.removeAll()
         
         default:
             
-            drawIsEmpty = false
+            drawIsEmptyPlayer1 = false
         
         }
         
@@ -142,21 +142,21 @@ class GameLogic {
         
         case 0:
             
-            drawIsEmpty = true
+            drawIsEmptyPlayer2 = true
             drawPilePlayer2.append(contentsOf: healPilePlayer2.shuffled())
             healPilePlayer2.removeAll()
         
         default:
             
-            drawIsEmpty = false
+            drawIsEmptyPlayer2 = false
         
         }
         
     }
     
-    func checkWinner {
+    func checkWinner() {
         
-        if player1deck.count = 0 {
+        if player1Deck.count == 0 {
             print("PLAYER 2 WINS!!!!!")
         }
         else {
