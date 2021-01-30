@@ -20,8 +20,6 @@ class WarGameLogic {
     var drawPilePlayer2 = [Card]()
     var healPilePlayer1 = [Card]()
     var healPilePlayer2 = [Card]()
-    var drawIsEmptyPlayer1 = false
-    var drawIsEmptyPlayer2 = false
     var battlePosition1 = [Card]()
     var battlePosition2 = [Card]()
     var bothBattlePositions: [[Card]]?
@@ -167,24 +165,20 @@ class WarGameLogic {
 
         if drawPilePlayer1.count == 0 {
             
-            drawIsEmptyPlayer1 = true
             drawPilePlayer1.append(contentsOf: healPilePlayer1.shuffled())
             healPilePlayer1.removeAll()
         }
         else {
-            
-            drawIsEmptyPlayer1 = false
+            return
         }
         
         if drawPilePlayer2.count == 0 {
             
-            drawIsEmptyPlayer2 = true
             drawPilePlayer2.append(contentsOf: healPilePlayer2.shuffled())
             healPilePlayer2.removeAll()
         }
-        else {
-            
-            drawIsEmptyPlayer2 = false
+        else {        
+            return
         }
     }
     
