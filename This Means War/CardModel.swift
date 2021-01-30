@@ -19,8 +19,8 @@ enum Suit : CaseIterable {
     case club, diamond, heart, spade
 }
 
-// Create a model for a given card in a standard 52-card deck
-class Card : Deck {
+// A standard playing card
+class Card : DeckOfCards {
      
     var suit:Suit
     var value:CardValue.RawValue
@@ -39,7 +39,6 @@ class Card : Deck {
         
         self.value = value
         self.suit = suit
-        
     }
 }
 

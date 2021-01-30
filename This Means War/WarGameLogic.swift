@@ -9,7 +9,7 @@ import Foundation
 
 class WarGameLogic {
     
-    private var deck:Deck?
+    var deck:DeckOfCards?
     public var player1Score:Int
     public var player2Score:Int
     private var atWar = false
@@ -22,20 +22,41 @@ class WarGameLogic {
     var healPilePlayer2 = [Card]()
     var battleFieldPlayer1 = [Card]()
     var battleFieldPlayer2 = [Card]()
-    var bothBattlePositions: [[Card]]?
     
     init() {
         
-        self.deck = Deck()
+        self.deck = DeckOfCards()
         // Player score = number of cards in player deck
-        self.player1Score = deck!.player1Deck.count
-        self.player2Score = deck!.player2Deck.count
-        self.drawPilePlayer1 = deck!.player1Deck
-        self.drawPilePlayer2 = deck!.player2Deck
+        self.player1Score = player1Deck.count
+        self.player2Score = player2Deck.count
+        self.drawPilePlayer1 = player1Deck
+        self.drawPilePlayer2 = player2Deck
         self.player1Deck = drawPilePlayer1 + healPilePlayer1
         self.player2Deck = drawPilePlayer2 + healPilePlayer2
-        self.bothBattlePositions = [battleFieldPlayer1, battleFieldPlayer2]
+        self.deal()
         self.checkDrawIsEmpty()
+    }
+    
+    // Deal the deck to two players, one at a time
+    private func deal() {
+
+        for (index, card) in deck!.deck.enumerated() {
+            
+            // 0-indexed, so 0- and even-indexed cards go to player1, odd-indexed cards go to player2
+            index % 2 == 0 ? player1Deck.append(card) : player2Deck.append(card)
+        }
+        
+        // Empty the deck once it has been dealt
+        deck!.deck.removeAll()
+        
+        // Test: Check that player decks are populated with the correct cards
+        let bothPlayerDecks = [player1Deck, player2Deck]
+        for (_, playerDeck) in bothPlayerDecks.enumerated() {
+
+            for (index, card) in playerDeck.enumerated() {
+                print(index, card.suit, card.value)
+            }
+        }
     }
     
     private func moveCardFromOneArrayToAnother(from: inout [Card], to: inout [Card]) {
@@ -51,9 +72,10 @@ class WarGameLogic {
     // Flip cards in Battle Field depending on whether or not players are in state of War
     func flipCard() {
         
+        let bothBattlePositions = [battleFieldPlayer1, battleFieldPlayer2]
         // The outer for loop makes sure the same action is taken or both players
         // TODO: find solution so I don't have to force unwrap bothBattlePositions
-        for position in bothBattlePositions! {
+        for position in bothBattlePositions {
         
             for (index, _) in position.enumerated() {
             
