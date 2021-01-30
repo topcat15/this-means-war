@@ -38,8 +38,7 @@ class WarGameLogic {
         self.checkDrawIsEmpty()
     }
     
-    // Move first element from one array to the last position in another array
-    private func moveCards(from: inout [Card], to: inout [Card]) {
+    private func moveCardFromOneArrayToAnother(from: inout [Card], to: inout [Card]) {
         
         guard let card = from.first else {
             return
@@ -79,8 +78,8 @@ class WarGameLogic {
         checkGameOver()
         
         // Place the top card from players' decks into the corresponding battle positions
-        moveCards(from: &drawPilePlayer1, to: &battlePosition1)
-        moveCards(from: &drawPilePlayer2, to: &battlePosition2)
+        moveCardFromOneArrayToAnother(from: &drawPilePlayer1, to: &battlePosition1)
+        moveCardFromOneArrayToAnother(from: &drawPilePlayer2, to: &battlePosition2)
          
         flipCard()
         
@@ -177,7 +176,7 @@ class WarGameLogic {
             drawPilePlayer2.append(contentsOf: healPilePlayer2.shuffled())
             healPilePlayer2.removeAll()
         }
-        else {        
+        else {
             return
         }
     }
@@ -187,15 +186,11 @@ class WarGameLogic {
         if player1Deck.count == 0 {
             
             print("PLAYER 2 WINS!!!!!")
-            
         }
         
         if player2Deck.count == 0 {
             
             print("PLAYER 2 WINS!!!!!")
-            
         }
-        
     }
-    
 }
