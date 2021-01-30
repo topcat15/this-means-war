@@ -22,6 +22,9 @@ class WarGameLogic {
     var healPilePlayer2 = [Card]()
     var drawIsEmptyPlayer1 = false
     var drawIsEmptyPlayer2 = false
+    var battlePosition1 = [Card]()
+    var battlePosition2 = [Card]()
+    var bothBattlePositions: [[Card]]?
     
     init() {
         
@@ -33,25 +36,42 @@ class WarGameLogic {
         self.drawPilePlayer2 = deck!.player2Deck
         self.player1Deck = drawPilePlayer1 + healPilePlayer1
         self.player2Deck = drawPilePlayer2 + healPilePlayer2
+        self.bothBattlePositions = [battlePosition1, battlePosition2]
         self.checkDrawIsEmpty()
     }
     
-    // The Battle Field
-    var battlePosition1 = [Card]()
-    var battlePosition2 = [Card]()
-    
-    // TODO: create func that encapsulates move cards from one array to another
-    
+    // Move first element from one array to the last position in another array
     private func moveCards(from: inout [Card], to: inout [Card]) {
         
         guard let card = from.first else {
             return
         }
-        // Add cards to battle position
+        
         to.append(card)
-        // Remove the cards from the draw pile arrays
         from.removeFirst()
         
+    }
+    
+    // Flip cards in Battle Field depending on whether or not players are in state of War
+    func flipCard() {
+        
+        // The outer for loop makes sure the same action is taken or both players
+        // TODO: find solution so I don't have to force unwrap bothBattlePositions
+        for position in bothBattlePositions! {
+        
+            for (index, _) in position.enumerated() {
+            
+                // Flip over any card in a 0- or even-indexed position in the battlePosition arrays
+                if index % 2 == 0 {
+                    
+                    position[index].faceUp = true
+                }
+                // Do not flip over any card in an odd-indexed position in the battlePosition arrays
+                else {
+                    position[index].faceUp = false
+                }
+            }
+        }
     }
     
     private func moveToBattleField() {
@@ -64,20 +84,7 @@ class WarGameLogic {
         moveCards(from: &drawPilePlayer1, to: &battlePosition1)
         moveCards(from: &drawPilePlayer2, to: &battlePosition2)
          
-        for (index, _) in battlePosition1.enumerated() {
-        
-            // Flip over any card in a 0- or even-indexed position in the battlePosition arrays
-            if index % 2 == 0 {
-                
-                battlePosition1[index].faceUp = true
-                battlePosition2[index].faceUp = true
-            }
-            // Do not flip over any card in an odd-indexed position in the battlePosition arrays
-            else {
-                battlePosition1[index].faceUp = false
-                battlePosition2[index].faceUp = false
-            }
-        }
+        flipCard()
         
         // Every time we move a card onto the battle field, check if the draw piles are empty afterward
         checkDrawIsEmpty()
@@ -88,7 +95,7 @@ class WarGameLogic {
     // Determines where the cards end up during a battle (who wins)
     private func moveToHealPile() {
         
-        // Cards moved into the heal piles will be turned face up
+        // Cards moved into the heal piles will be turned face up no matter what
         func flipWhenMovedToHealPile() {
             
             battlePosition1.forEach {
@@ -112,6 +119,7 @@ class WarGameLogic {
             
             battlePosition1.removeAll()
             battlePosition2.removeAll()
+            
         }
         else if battlePosition1.last!.value < battlePosition2.last!.value {
             
@@ -151,40 +159,30 @@ class WarGameLogic {
                 moveToHealPile()
             }
         } while battlePosition1.last!.value == battlePosition2.last!.value
-        // If we are still at War, the while condition is still true. so the code is repeated
+        // If we are still at War, the while condition is still true, so the code is repeated
     }
 
     // When a draw pile is empty, the heal pile is shuffled and then transferred to the draw pile
     private func checkDrawIsEmpty() {
-        
-        let drawCountPlayer1 = drawPilePlayer1.count
-        let drawCountPlayer2 = drawPilePlayer2.count
-        
-        // For player 1
-        // TODO: make if statement instead
-        switch drawCountPlayer1 {
-        
-        case 0:
+
+        if drawPilePlayer1.count == 0 {
             
             drawIsEmptyPlayer1 = true
             drawPilePlayer1.append(contentsOf: healPilePlayer1.shuffled())
             healPilePlayer1.removeAll()
-        
-        default:
+        }
+        else {
             
-            drawIsEmptyPlayer1 = false        
+            drawIsEmptyPlayer1 = false
         }
         
-        // For player 2
-        switch drawCountPlayer2 {
-        
-        case 0:
+        if drawPilePlayer2.count == 0 {
             
             drawIsEmptyPlayer2 = true
             drawPilePlayer2.append(contentsOf: healPilePlayer2.shuffled())
             healPilePlayer2.removeAll()
-        
-        default:
+        }
+        else {
             
             drawIsEmptyPlayer2 = false
         }
