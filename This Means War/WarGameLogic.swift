@@ -12,7 +12,6 @@ class WarGameLogic {
     var deck:DeckOfCards?
     public var player1Score:Int
     public var player2Score:Int
-    private var atWar = false
     // Each player's deck consists of a draw pile and a heal pile
     var player1Deck = [Card]()
     var player2Deck = [Card]()
@@ -22,6 +21,22 @@ class WarGameLogic {
     var healPilePlayer2 = [Card]()
     var battleFieldPlayer1 = [Card]()
     var battleFieldPlayer2 = [Card]()
+    private var atWar:Bool {
+        if (battleFieldPlayer1.last!.value == battleFieldPlayer2.last!.value && battleFieldIsEmpty == false) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    private var battleFieldIsEmpty:Bool {
+        if battleFieldPlayer1.count == 0 && battleFieldPlayer2.count == 0 {
+            return true
+        }
+        else {
+            return false
+        }
+    }
     
     init() {
         
@@ -110,8 +125,9 @@ class WarGameLogic {
         // TODO: what if you only have one card left?...then your drawpile is empty and so is your heal pile...can we append nothing to an array and it just doesn't break?
     }
     
+    
     // Determines where the cards end up during a battle (who wins)
-    private func moveToHealPile() {
+    private func determineBattleWinner() {
         
         // Cards moved into the heal piles will be turned face up no matter what
         func flipWhenMovedToHealPile() {
@@ -157,26 +173,26 @@ class WarGameLogic {
         
         repeat {
             
-            // Before each round we should check for a game winner
+            // Before each round check for a game winner
             checkGameOver()
             
-            // First, check to see if we are at war
-            if battleFieldPlayer1.count > 1 {
+            // Check to see if we are at war
+            if atWar {
                 
                 // Move two cards to the Battle Field
                 moveCardToBattleField()
                 moveCardToBattleField()
                 // Determine a winner or if we are still at War
-                moveToHealPile()
+                determineBattleWinner()
             }
             
-            // Second, check to make sure Battle Field is not empty (otherwise you cannot battle)
-            else if battleFieldPlayer1.count > 0 && battleFieldPlayer2.count > 0 {
+            // If the Battle Field is empty, it is a normal battle
+            else if battleFieldIsEmpty == true {
                 
                 moveCardToBattleField()
-                moveToHealPile()
+                determineBattleWinner()
             }
-        } while battleFieldPlayer1.last!.value == battleFieldPlayer2.last!.value
+        } while atWar
         // If we are still at War, the while condition is still true, so the code is repeated
 
     }
