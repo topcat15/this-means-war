@@ -59,7 +59,7 @@ class WarGameLogic {
     }
     
     // Deal the deck to two players, one at a time
-    private func deal() {
+    func deal() {
 
         for (index, card) in deck!.deck.enumerated() {
             
