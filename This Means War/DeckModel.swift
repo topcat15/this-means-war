@@ -12,6 +12,12 @@ class DeckOfCards {
     
     // Store the deck
     var deck = [Card]()
+    
+    init() {
+        
+        addCardsToDeck()
+        shuffle()
+    }
 
     // Create a deck of cards
     private func addCardsToDeck() {
@@ -41,11 +47,5 @@ class DeckOfCards {
         deck.forEach() {
             print($0.suit, $0.value)
         }
-    }
-    
-    init() {
-        
-        addCardsToDeck()
-        shuffle()
     }
 }
