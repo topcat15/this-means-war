@@ -20,10 +20,10 @@ enum Suit : CaseIterable {
 }
 
 // A standard playing card
-class Card : DeckOfCards {
+class Card {
      
-    var suit:Suit
-    var value:CardValue.RawValue
+    var suit: Suit
+    var value: CardValue.RawValue
     var faceUp = false
     var image:String {
         if faceUp == false {
@@ -36,7 +36,7 @@ class Card : DeckOfCards {
     }
     
     init (suit: Suit, value: CardValue.RawValue) {
-        
+
         self.value = value
         self.suit = suit
     }

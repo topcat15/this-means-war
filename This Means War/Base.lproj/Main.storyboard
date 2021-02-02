@@ -78,14 +78,20 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="26" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJI-S9-17x">
-                                        <rect key="frame" x="0.0" y="24.5" width="36.5" height="36"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJI-S9-17x">
+                                        <rect key="frame" x="0.0" y="24.5" width="36" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SE9-6e-EkW">
+                                <rect key="frame" x="158.5" y="702" width="97" height="140"/>
+                                <connections>
+                                    <action selector="moveTopOfDrawToBattleField:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dg5-f6-34G"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -93,6 +99,7 @@
                             <constraint firstItem="nWw-hn-g5R" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="1iE-SK-tR6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fb5-Ft-7RZ" secondAttribute="trailing" constant="20" id="1xZ-Pt-0R7"/>
                             <constraint firstItem="IF2-BZ-ucM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4aH-ut-hUx"/>
+                            <constraint firstItem="SE9-6e-EkW" firstAttribute="height" secondItem="kW7-6s-F4O" secondAttribute="height" id="6En-dx-z2X"/>
                             <constraint firstItem="jX2-ah-rSa" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="75c-3M-ovw"/>
                             <constraint firstAttribute="bottom" secondItem="IF2-BZ-ucM" secondAttribute="bottom" id="7Bt-A9-tCr"/>
                             <constraint firstItem="IF2-BZ-ucM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ABC-Q3-Hbf"/>
@@ -100,13 +107,16 @@
                             <constraint firstItem="k1g-TO-Aaj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ixe-wR-BGp"/>
                             <constraint firstItem="jX2-ah-rSa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="MrF-kq-Qx1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nWw-hn-g5R" secondAttribute="bottom" constant="20" id="O0d-9E-mj8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SE9-6e-EkW" secondAttribute="bottom" constant="20" id="POL-pN-EX6"/>
                             <constraint firstItem="fb5-Ft-7RZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="VQA-eB-RcA"/>
+                            <constraint firstItem="SE9-6e-EkW" firstAttribute="width" secondItem="kW7-6s-F4O" secondAttribute="width" id="bQO-Th-Tl8"/>
                             <constraint firstItem="kW7-6s-F4O" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qog-Se-4Et"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jX2-ah-rSa" secondAttribute="trailing" constant="20" id="sdg-Av-L2E"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kW7-6s-F4O" secondAttribute="bottom" constant="20" id="t0T-RO-vpt"/>
                             <constraint firstAttribute="trailing" secondItem="IF2-BZ-ucM" secondAttribute="trailing" id="tKt-Xt-8Dc"/>
                             <constraint firstItem="jX2-ah-rSa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="v9u-nD-Lcx"/>
                             <constraint firstItem="k1g-TO-Aaj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="26" id="xHb-uP-RlN"/>
+                            <constraint firstItem="SE9-6e-EkW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yXW-lU-6xa"/>
                         </constraints>
                     </view>
                     <connections>

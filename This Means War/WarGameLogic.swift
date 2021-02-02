@@ -10,8 +10,6 @@ import Foundation
 class WarGameLogic {
     
     var deck:DeckOfCards?
-    public var firstPlayerScore:Int
-    public var secondPlayerScore:Int
     // Each player's deck consists of a draw pile and a heal pile
     var firstPlayerDeck = [Card]()
     var secondPlayerDeck = [Card]()
@@ -37,13 +35,21 @@ class WarGameLogic {
             return false
         }
     }
+    // Player score = number of cards in player deck
+    public var firstPlayerScore:Int {
+        get {
+            firstPlayerDeck.count
+        }
+    }
+    public var secondPlayerScore:Int {
+        get {
+            secondPlayerDeck.count
+        }
+    }
     
     init() {
         
         self.deck = DeckOfCards()
-        // Player score = number of cards in player deck
-        self.firstPlayerScore = firstPlayerDeck.count
-        self.secondPlayerScore = secondPlayerDeck.count
         self.drawPileFirstPlayer = firstPlayerDeck
         self.drawPileSecondPlayer = secondPlayerDeck
         self.firstPlayerDeck = drawPileFirstPlayer + healPileFirstPlayer

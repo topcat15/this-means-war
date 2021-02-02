@@ -7,7 +7,15 @@
 
 import UIKit
 
+//protocol DeckProtocols {
+//
+//    func moveCardToBattleField()
+//
+//}
+
 class ViewController: UIViewController {
+    
+    var game = WarGameLogic()
     
     @IBOutlet weak var battleFieldFirstPlayer: UIImageView!
     @IBOutlet weak var battleFieldSecondPlayer: UIImageView!
@@ -17,6 +25,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var healPileSecondPlayer: UIImageView!
     @IBOutlet weak var scoreLabelFirstPlayer: UILabel!
     @IBOutlet weak var scoreLabelSecondPlayer: UILabel!
+//    var delegate: DeckProtocols?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,18 +35,29 @@ class ViewController: UIViewController {
         self.battleFieldSecondPlayer.image = UIImage(named: "outline")
         self.healPileFirstPlayer.image = UIImage(named: "outline")
         self.healPileSecondPlayer.image = UIImage(named: "outline")
-        self.scoreLabelFirstPlayer.text = "26"
-        self.scoreLabelSecondPlayer.text = "26"
+        game.deal()
+ //       updateScore()
+        self.scoreLabelFirstPlayer.text = String(game.firstPlayerScore)
+        self.scoreLabelSecondPlayer.text = String(game.firstPlayerScore)
+
     }
     
     // Update score
 //    func updateScore() {
 //
-//        scoreLabelFirstPlayer.text = String(startGame.firstPlayerScore)
-//        scoreLabelSecondPlayer.text = String(startGame.secondPlayerScore)
-//
+//        self.scoreLabelFirstPlayer.text = String(game.firstPlayerScore)
+//        self.scoreLabelSecondPlayer.text = String(game.firstPlayerScore)
 //    }
     
+//    @IBAction func moveTopOfDrawToBattleField(_ sender: Any) {
+//        
+//        game.battle()
+//        print("player score is: \(game.firstPlayerScore)")
+//        
+//    }
+    
+    
+
     
     
     
