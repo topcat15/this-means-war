@@ -41,7 +41,7 @@ class DeckOfCards {
         deck = deck.shuffled()
     }
     
-    // Test: Check the array
+    // TEST: Check the array
     func viewDeck() {
 
         deck.forEach() {

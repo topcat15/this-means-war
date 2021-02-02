@@ -9,7 +9,7 @@ import Foundation
 
 class WarGameLogic {
     
-    var deck:DeckOfCards?
+    var warDeck:DeckOfCards?
     // Each player's deck consists of a draw pile and a heal pile
     var beginningFirstPlayerDeck = [Card]()
     var beginningSecondPlayerDeck = [Card]()
@@ -53,7 +53,7 @@ class WarGameLogic {
     
     init() {
         
-        self.deck = DeckOfCards()
+        self.warDeck = DeckOfCards()
         self.deal()
         self.checkDrawIsEmpty()
         
@@ -62,7 +62,7 @@ class WarGameLogic {
     // Deal the deck to two players, one at a time
     func deal() {
         
-        for (index, card) in deck!.deck.enumerated() {
+        for (index, card) in warDeck!.deck.enumerated() {
             
             // 0-indexed, so 0- and even-indexed cards go to firstPlayer, odd-indexed cards go to secondPlayer
             index % 2 == 0 ? beginningFirstPlayerDeck.append(card) : beginningSecondPlayerDeck.append(card)
@@ -92,6 +92,7 @@ class WarGameLogic {
         
         to.append(card)
         from.removeFirst()
+
     }
     
     private func moveAllCardsFromOneArrayToAnother(from: inout [Card], to: inout [Card]) {
@@ -145,9 +146,20 @@ class WarGameLogic {
         // TODO: what if you only have one card left?...then your drawpile is empty and so is your heal pile...can we append nothing to an array and it just doesn't break?
     }
     
-    
     // Determines where the cards end up during a battle (who wins)
     private func determineBattleWinner() {
+        
+//        for (index, card) in battleFieldFirstPlayer.enumerated() {
+//            
+//            print("player 1's card is \(card.faceUp) \(card.value)")
+//            
+//        }
+//        for (index, card) in battleFieldSecondPlayer.enumerated() {
+//            
+//            print("player 2's card is \(card.suit) \(card.value)")
+//            
+//        }
+        
         
         // Cards moved into the heal piles will be turned face up no matter what
         func flipWhenMovedToHealPile() {
