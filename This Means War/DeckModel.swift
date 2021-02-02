@@ -10,8 +10,6 @@ import Foundation
 // A standard 52-card deck, shuffled
 class DeckOfCards {
     
-    // THIS IS A TEST
-    
     // Store the deck
     var deck = [Card]()
 
@@ -28,14 +26,8 @@ class DeckOfCards {
                 card.value = value.rawValue
                 card.suit = suit
                 deck.append(card)
-                
-                // Logging to verify card creation
-                print("created card " + "\(suit) \(value)" )
             }
         }
-        
-        
-
     }
     
     private func shuffle() {
