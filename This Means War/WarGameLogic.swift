@@ -11,8 +11,8 @@ class WarGameLogic {
     
     var deck:DeckOfCards?
     // Each player's deck consists of a draw pile and a heal pile
-    var firstPlayerDeck = [Card]()
-    var secondPlayerDeck = [Card]()
+    var beginningFirstPlayerDeck = [Card]()
+    var beginningSecondPlayerDeck = [Card]()
     var drawPileFirstPlayer = [Card]()
     var drawPileSecondPlayer = [Card]()
     var healPileFirstPlayer = [Card]()
@@ -20,12 +20,15 @@ class WarGameLogic {
     var battleFieldFirstPlayer = [Card]()
     var battleFieldSecondPlayer = [Card]()
     private var atWar:Bool {
-        if (battleFieldFirstPlayer.last!.value == battleFieldSecondPlayer.last!.value && battleFieldIsEmpty == false) {
-            return true
-        }
-        else {
+        guard battleFieldFirstPlayer.last != nil else {
             return false
         }
+            if (battleFieldFirstPlayer.last!.value == battleFieldSecondPlayer.last!.value && battleFieldIsEmpty == false) {
+                return true
+            }
+            else {
+                return false
+            }
     }
     private var battleFieldIsEmpty:Bool {
         if battleFieldFirstPlayer.count == 0 && battleFieldSecondPlayer.count == 0 {
@@ -35,40 +38,41 @@ class WarGameLogic {
             return false
         }
     }
-    // Player score = number of cards in player deck
-    public var firstPlayerScore:Int {
+    // Player 1 score
+    var firstPlayerDeck:[Card] {
         get {
-            firstPlayerDeck.count
+            drawPileFirstPlayer + healPileFirstPlayer
         }
     }
-    public var secondPlayerScore:Int {
+    // Player 2 score
+    var secondPlayerDeck:[Card] {
         get {
-            secondPlayerDeck.count
+            drawPileSecondPlayer + healPileSecondPlayer
         }
     }
     
     init() {
         
         self.deck = DeckOfCards()
-        self.drawPileFirstPlayer = firstPlayerDeck
-        self.drawPileSecondPlayer = secondPlayerDeck
-        self.firstPlayerDeck = drawPileFirstPlayer + healPileFirstPlayer
-        self.secondPlayerDeck = drawPileSecondPlayer + healPileSecondPlayer
         self.deal()
         self.checkDrawIsEmpty()
+        
     }
     
     // Deal the deck to two players, one at a time
     func deal() {
-
+        
         for (index, card) in deck!.deck.enumerated() {
             
             // 0-indexed, so 0- and even-indexed cards go to firstPlayer, odd-indexed cards go to secondPlayer
-            index % 2 == 0 ? firstPlayerDeck.append(card) : secondPlayerDeck.append(card)
+            index % 2 == 0 ? beginningFirstPlayerDeck.append(card) : beginningSecondPlayerDeck.append(card)
         }
         
-        // Empty the deck once it has been dealt
-        deck!.deck.removeAll()
+        drawPileFirstPlayer.append(contentsOf: beginningFirstPlayerDeck)
+        drawPileSecondPlayer.append(contentsOf: beginningSecondPlayerDeck)
+        
+//        firstPlayerDeck = drawPileFirstPlayer + healPileFirstPlayer
+//        secondPlayerDeck = drawPileSecondPlayer + healPileSecondPlayer
         
         // Test: Check that player decks are populated with the correct cards
         let bothPlayerDecks = [firstPlayerDeck, secondPlayerDeck]
@@ -88,6 +92,16 @@ class WarGameLogic {
         
         to.append(card)
         from.removeFirst()
+    }
+    
+    private func moveAllCardsFromOneArrayToAnother(from: inout [Card], to: inout [Card]) {
+        
+        guard from.first != nil else {
+            return
+        }
+        
+        to.append(contentsOf: from)
+        from.removeAll()
     }
     
     // Flip cards in Battle Field depending on whether or not players are in state of War
@@ -113,7 +127,7 @@ class WarGameLogic {
         }
     }
     
-    private func moveCardToBattleField() {
+    func moveCardToBattleField() {
         
         // First, check to see if there is a winner
         // TODO: check if game over is bool value
@@ -122,7 +136,7 @@ class WarGameLogic {
         // Place the top card from players' decks into the corresponding battle positions
         moveCardFromOneArrayToAnother(from: &drawPileFirstPlayer, to: &battleFieldFirstPlayer)
         moveCardFromOneArrayToAnother(from: &drawPileSecondPlayer, to: &battleFieldSecondPlayer)
-         
+        
         flipCard()
         
         // Every time we move a card onto the battle field, check if the draw piles are empty afterward
@@ -148,29 +162,24 @@ class WarGameLogic {
                 $0.faceUp = true
             }
         }
-        
-        if battleFieldFirstPlayer.last!.value > battleFieldSecondPlayer.last!.value {
-        
-            flipWhenMovedToHealPile()
+        if battleFieldFirstPlayer.last != nil {
             
-            // Add cards to player 1's heal pile
-            healPileFirstPlayer.append(contentsOf: battleFieldFirstPlayer)
-            healPileFirstPlayer.append(contentsOf: battleFieldSecondPlayer)
+            if battleFieldFirstPlayer.last!.value > battleFieldSecondPlayer.last!.value {
             
-            battleFieldFirstPlayer.removeAll()
-            battleFieldSecondPlayer.removeAll()
-            
-        }
-        else if battleFieldFirstPlayer.last!.value < battleFieldSecondPlayer.last!.value {
-            
-            flipWhenMovedToHealPile()
-            
-            // Add cards to player 2's heal pile
-            healPileSecondPlayer.append(contentsOf: battleFieldFirstPlayer)
-            healPileSecondPlayer.append(contentsOf: battleFieldSecondPlayer)
-            
-            battleFieldFirstPlayer.removeAll()
-            battleFieldSecondPlayer.removeAll()
+                flipWhenMovedToHealPile()
+                
+                // Add cards to player 1's heal pile
+                moveAllCardsFromOneArrayToAnother(from: &battleFieldFirstPlayer, to: &healPileFirstPlayer)
+                moveAllCardsFromOneArrayToAnother(from: &battleFieldSecondPlayer, to: &healPileFirstPlayer)
+            }
+            else if battleFieldFirstPlayer.last!.value < battleFieldSecondPlayer.last!.value {
+                
+                flipWhenMovedToHealPile()
+                
+                // Add cards to player 2's heal pile
+                moveAllCardsFromOneArrayToAnother(from: &battleFieldFirstPlayer, to: &healPileSecondPlayer)
+                moveAllCardsFromOneArrayToAnother(from: &battleFieldSecondPlayer, to: &healPileSecondPlayer)
+            }
         }
     }
 
@@ -178,27 +187,27 @@ class WarGameLogic {
     func battle() {
         
         repeat {
-            
+
             // Before each round check for a game winner
             checkGameOver()
-            
+
             // Check to see if we are at war
-            if atWar {
-                
+            if atWar == true {
+
                 // Move two cards to the Battle Field
                 moveCardToBattleField()
                 moveCardToBattleField()
                 // Determine a winner or if we are still at War
                 determineBattleWinner()
             }
-            
+
             // If the Battle Field is empty, it is a normal battle
             else if battleFieldIsEmpty == true {
-                
+
                 moveCardToBattleField()
                 determineBattleWinner()
             }
-        } while atWar
+        } while atWar == true
         // If we are still at War, the while condition is still true, so the code is repeated
 
     }
