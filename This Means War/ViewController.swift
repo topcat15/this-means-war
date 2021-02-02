@@ -35,26 +35,35 @@ class ViewController: UIViewController {
         self.battleFieldSecondPlayer.image = UIImage(named: "outline")
         self.healPileFirstPlayer.image = UIImage(named: "outline")
         self.healPileSecondPlayer.image = UIImage(named: "outline")
-        game.deal()
  //       updateScore()
-        self.scoreLabelFirstPlayer.text = String(game.firstPlayerScore)
-        self.scoreLabelSecondPlayer.text = String(game.firstPlayerScore)
+        self.scoreLabelFirstPlayer.text = String(game.firstPlayerDeck.count)
+        self.scoreLabelSecondPlayer.text = String(game.secondPlayerDeck.count)
 
     }
     
-    // Update score
-//    func updateScore() {
-//
-//        self.scoreLabelFirstPlayer.text = String(game.firstPlayerScore)
-//        self.scoreLabelSecondPlayer.text = String(game.firstPlayerScore)
-//    }
+    func updateScore() {
+
+     scoreLabelFirstPlayer.text = String(game.firstPlayerDeck.count)
+     scoreLabelSecondPlayer.text = String(game.secondPlayerDeck.count)
+    }
     
-//    @IBAction func moveTopOfDrawToBattleField(_ sender: Any) {
-//        
-//        game.battle()
-//        print("player score is: \(game.firstPlayerScore)")
-//        
-//    }
+    @IBAction func moveTopOfDrawToBattleField(_ sender: Any) {
+        
+        game.battle()
+        game.moveCardToBattleField()
+        
+        // Update the score in the view after the battle
+        updateScore()
+        if game.battleFieldFirstPlayer.last != nil {
+         
+//            battleFieldFirstPlayer.image = UIImage(named: game.battleFieldFirstPlayer.last?.image)
+//            
+//            battleFieldSecondPlayer.image = UIImage(named: game.battleFieldFirstPlayer.last?.image)
+            
+        }
+        
+        
+    }
     
     
 
