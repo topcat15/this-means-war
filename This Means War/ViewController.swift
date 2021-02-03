@@ -47,22 +47,42 @@ class ViewController: UIViewController {
      scoreLabelSecondPlayer.text = String(game.secondPlayerDeck.count)
     }
     
+    
     @IBAction func moveTopOfDrawToBattleField(_ sender: Any) {
-        
-        game.battle()
+         
         game.moveCardToBattleField()
         
-        // Update the score in the view after the battle
-        updateScore()
-        if game.battleFieldFirstPlayer.last != nil {
+        // Check to see if the
+        if game.checkIfArrayOfCardsIsEmpty(game.battleFieldFirstPlayer) == false {
          
-//            battleFieldFirstPlayer.image = UIImage(named: game.battleFieldFirstPlayer.last?.image)
-//            
-//            battleFieldSecondPlayer.image = UIImage(named: game.battleFieldFirstPlayer.last?.image)
+            battleFieldFirstPlayer.image = UIImage(named: "\(game.battleFieldFirstPlayer.first!.image)")
+        }
+        if game.checkIfArrayOfCardsIsEmpty(game.battleFieldSecondPlayer) == false {
+            battleFieldSecondPlayer.image = UIImage(named: "\(game.battleFieldSecondPlayer.first!.image)")
+        }
+    }
+    
+    @IBAction func battle(_ sender: Any) {
+        
+        game.determineBattleWinner()
+        
+        if game.winner == "Player 1" {
+            
+            healPileFirstPlayer.image = UIImage(named: "\(game.healPileFirstPlayer.last!.image)")
             
         }
         
+        if game.winner == "Player 2" {
+            
+            healPileSecondPlayer.image = UIImage(named: "\(game.healPileSecondPlayer.last!.image)")
+            
+        }
         
+        battleFieldFirstPlayer.image = UIImage(named: "outline")
+        battleFieldSecondPlayer.image = UIImage(named: "outline")
+        
+        // Update the score in the view after the battle
+        updateScore()
     }
     
     
@@ -75,13 +95,10 @@ class ViewController: UIViewController {
         // No cards appear in discard pile when it is empty...another way to say that: only show images of cards if they are in play
     
 
-        // TODO: Show outline on board where discard pile goes
-
     // Heal Pile
 
         // No cards appear in discard pile when it is empty
 
-        // OPTIONAL: show outline on board where discard pile goes
-    
+
     
 }

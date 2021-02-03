@@ -92,6 +92,16 @@
                                     <action selector="moveTopOfDrawToBattleField:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dg5-f6-34G"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gro-ne-9HM">
+                                <rect key="frame" x="40" y="701.5" width="65" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="Battle!">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="battle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3DL-dJ-f3e"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -104,12 +114,15 @@
                             <constraint firstAttribute="bottom" secondItem="IF2-BZ-ucM" secondAttribute="bottom" id="7Bt-A9-tCr"/>
                             <constraint firstItem="IF2-BZ-ucM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ABC-Q3-Hbf"/>
                             <constraint firstItem="jX2-ah-rSa" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.4" id="DXv-Oo-9SO"/>
+                            <constraint firstItem="kW7-6s-F4O" firstAttribute="leading" secondItem="gro-ne-9HM" secondAttribute="trailing" constant="53.5" id="Ehr-RH-LgO"/>
                             <constraint firstItem="k1g-TO-Aaj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ixe-wR-BGp"/>
                             <constraint firstItem="jX2-ah-rSa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="MrF-kq-Qx1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nWw-hn-g5R" secondAttribute="bottom" constant="20" id="O0d-9E-mj8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SE9-6e-EkW" secondAttribute="bottom" constant="20" id="POL-pN-EX6"/>
+                            <constraint firstItem="nWw-hn-g5R" firstAttribute="top" secondItem="gro-ne-9HM" secondAttribute="bottom" constant="40" id="QHM-fX-lD9"/>
                             <constraint firstItem="fb5-Ft-7RZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="VQA-eB-RcA"/>
                             <constraint firstItem="SE9-6e-EkW" firstAttribute="width" secondItem="kW7-6s-F4O" secondAttribute="width" id="bQO-Th-Tl8"/>
+                            <constraint firstItem="gro-ne-9HM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="c7H-fv-Tek"/>
                             <constraint firstItem="kW7-6s-F4O" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qog-Se-4Et"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jX2-ah-rSa" secondAttribute="trailing" constant="20" id="sdg-Av-L2E"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kW7-6s-F4O" secondAttribute="bottom" constant="20" id="t0T-RO-vpt"/>
