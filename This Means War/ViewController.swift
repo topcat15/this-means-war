@@ -47,17 +47,32 @@ class ViewController: UIViewController {
      scoreLabelSecondPlayer.text = String(game.secondPlayerDeck.count)
     }
     
+    // Reset the image property to "outline" if the [Card] is empty (cardOutlet is the VC equivalent to the model counterpart)
+    func resetCardImagesWhenCardArrayIsEmpty(_ arrayOfCards: [Card], _ cardOutlet: UIImageView) {
+        
+        if arrayOfCards.count == 0 {
+            
+            cardOutlet.image = UIImage(named: "outline")
+        }
+    }
     
     @IBAction func moveTopOfDrawToBattleField(_ sender: Any) {
          
         game.moveCardToBattleField()
         
-        // Check to see if the
+        // Check to see if we need to reset the image for any empty [Card]
+        resetCardImagesWhenCardArrayIsEmpty(game.healPileFirstPlayer, healPileFirstPlayer)
+        resetCardImagesWhenCardArrayIsEmpty(game.healPileSecondPlayer, healPileSecondPlayer)
+        resetCardImagesWhenCardArrayIsEmpty(game.drawPileFirstPlayer, drawPileFirstPlayer)
+        resetCardImagesWhenCardArrayIsEmpty(game.drawPileSecondPlayer, drawPileSecondPlayer)
+        
+        // Show the cards that are moved into the battle field positions
         if game.checkIfArrayOfCardsIsEmpty(game.battleFieldFirstPlayer) == false {
-         
+
             battleFieldFirstPlayer.image = UIImage(named: "\(game.battleFieldFirstPlayer.first!.image)")
         }
         if game.checkIfArrayOfCardsIsEmpty(game.battleFieldSecondPlayer) == false {
+
             battleFieldSecondPlayer.image = UIImage(named: "\(game.battleFieldSecondPlayer.first!.image)")
         }
     }

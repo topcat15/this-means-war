@@ -159,7 +159,7 @@ class WarGameLogic {
                 $0.faceUp = true
             }
         }
-        if battleFieldFirstPlayer.last != nil {
+        if checkIfArrayOfCardsIsEmpty(battleFieldFirstPlayer) == false && checkIfArrayOfCardsIsEmpty(battleFieldSecondPlayer) == false {
             
             if battleFieldFirstPlayer.last!.value > battleFieldSecondPlayer.last!.value {
             
@@ -221,10 +221,11 @@ class WarGameLogic {
         // If we are still at War, the while condition is still true, so the code is repeated
 
     }
+    
     // When a draw pile is empty, the heal pile is shuffled and then transferred to the draw pile
     func checkIfArrayOfCardsIsEmpty(_ arrayOfCards: [Card]) -> Bool {
 
-        guard arrayOfCards.first != nil else {
+        guard arrayOfCards.last != nil else {
             return true
         }
         return false
