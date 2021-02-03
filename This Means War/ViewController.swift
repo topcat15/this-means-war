@@ -7,12 +7,6 @@
 
 import UIKit
 
-//protocol DeckProtocols {
-//
-//    func moveCardToBattleField()
-//
-//}
-
 class ViewController: UIViewController {
     
     var game = WarGameLogic()
@@ -25,20 +19,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var healPileSecondPlayer: UIImageView!
     @IBOutlet weak var scoreLabelFirstPlayer: UILabel!
     @IBOutlet weak var scoreLabelSecondPlayer: UILabel!
-//    var delegate: DeckProtocols?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.drawPileFirstPlayer.image = UIImage(named: "back")
         self.drawPileSecondPlayer.image = UIImage(named: "back")
         self.battleFieldFirstPlayer.image = UIImage(named: "outline")
         self.battleFieldSecondPlayer.image = UIImage(named: "outline")
         self.healPileFirstPlayer.image = UIImage(named: "outline")
         self.healPileSecondPlayer.image = UIImage(named: "outline")
- //       updateScore()
         self.scoreLabelFirstPlayer.text = String(game.firstPlayerDeck.count)
         self.scoreLabelSecondPlayer.text = String(game.secondPlayerDeck.count)
-
     }
     
     func updateScore() {
@@ -71,49 +63,34 @@ class ViewController: UIViewController {
 
             battleFieldFirstPlayer.image = UIImage(named: "\(game.battleFieldFirstPlayer.first!.image)")
         }
+        
         if game.checkIfArrayOfCardsIsEmpty(game.battleFieldSecondPlayer) == false {
 
             battleFieldSecondPlayer.image = UIImage(named: "\(game.battleFieldSecondPlayer.first!.image)")
         }
     }
     
+    // Determine battle winner
     @IBAction func battle(_ sender: Any) {
         
         game.determineBattleWinner()
         
+        // Update the images for the heal piles
         if game.winner == "Player 1" {
             
             healPileFirstPlayer.image = UIImage(named: "\(game.healPileFirstPlayer.last!.image)")
-            
         }
         
         if game.winner == "Player 2" {
             
             healPileSecondPlayer.image = UIImage(named: "\(game.healPileSecondPlayer.last!.image)")
-            
         }
         
+        // Reset images for battle field positions to the outline
         battleFieldFirstPlayer.image = UIImage(named: "outline")
         battleFieldSecondPlayer.image = UIImage(named: "outline")
         
         // Update the score in the view after the battle
         updateScore()
     }
-    
-    
-
-    
-    
-    
-    // Draw Pile
-
-        // No cards appear in discard pile when it is empty...another way to say that: only show images of cards if they are in play
-    
-
-    // Heal Pile
-
-        // No cards appear in discard pile when it is empty
-
-
-    
 }
