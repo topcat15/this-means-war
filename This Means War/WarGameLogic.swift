@@ -140,8 +140,6 @@ class WarGameLogic {
         // Every time we move a card onto the battle field, check if the draw piles are empty afterward
         keepDrawPilesFull()
         
-        print(battleFieldFirstPlayer[0].faceUp, battleFieldFirstPlayer[0].image)
-        
         // TODO: what if you only have one card left?...then your drawpile is empty and so is your heal pile...can we append nothing to an array and it just doesn't break?
     }
     
@@ -247,8 +245,8 @@ class WarGameLogic {
     // Check draw piles after moving a card, make sure they are not empty
     func keepDrawPilesFull() {
         
-        moveShuffledHealPileToDrawPile(&drawPileFirstPlayer, &healPileFirstPlayer)
-        moveShuffledHealPileToDrawPile(&drawPileSecondPlayer, &healPileSecondPlayer)
+        moveShuffledHealPileToDrawPile(&healPileFirstPlayer, &drawPileFirstPlayer)
+        moveShuffledHealPileToDrawPile(&healPileSecondPlayer, &drawPileSecondPlayer)
     }
     
     private func checkGameOver() {
