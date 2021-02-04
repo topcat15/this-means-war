@@ -75,8 +75,6 @@ class WarGameLogic {
             
             // Get the draw pile filled if it is empty after moving a card to the battle field
             keepDrawPilesFull()
-            
-            // TODO: what if you only have one card left?...then your drawpile is empty and so is your heal pile...can we append nothing to an array and it just doesn't break?
         }
     }
     
