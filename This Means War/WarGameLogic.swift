@@ -267,6 +267,5 @@ class WarGameLogic {
             }
         } while atWar == true
         // If we are still at War, the while condition is still true, so the code is repeated
-
     }
 }
