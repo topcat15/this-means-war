@@ -48,11 +48,24 @@ class ViewController: UIViewController {
         }
     }
     
-    func setCardImagesWhenCardArrayIsPopulated(_ arrayOfCards: [Card], _ outlet: UIImageView) {
+    // This is used to reference the first or last card in an array when used as a parameter
+    enum FirstOrLast {
+        
+        case first, last
+    }
+    
+    func setCardImagesWhenCardArrayIsPopulated(_ arrayOfCards: [Card], _ outlet: UIImageView, _ firstOrLast: FirstOrLast) {
         
         if game.checkIfArrayOfCardsIsEmpty(arrayOfCards) == false {
             
-            outlet.image = UIImage(named: "\(arrayOfCards.first!.image)")
+            if firstOrLast == FirstOrLast.first {
+                
+                outlet.image = UIImage(named: "\(arrayOfCards.first!.image)")
+            }
+            else {
+                
+                outlet.image = UIImage(named: "\(arrayOfCards.last!.image)")
+            }
         }
     }
     
@@ -66,7 +79,7 @@ class ViewController: UIViewController {
     
     @IBAction func moveTopOfDrawToBattleField(_ sender: Any) {
          
-        game.moveCardToBattleField()
+        game.moveCardToBattleFieldIfGameNotOver()
         
         // Check to see if we need to reset the image for any empty [Card]
         resetCardImagesWhenCardArrayIsEmpty(game.healPileFirstPlayer, healPileFirstPlayer)
@@ -75,8 +88,8 @@ class ViewController: UIViewController {
         resetCardImagesWhenCardArrayIsEmpty(game.drawPileSecondPlayer, drawPileSecondPlayer)
         
         // Show the cards that are moved into the battle field positions
-        setCardImagesWhenCardArrayIsPopulated(game.battleFieldFirstPlayer, battleFieldFirstPlayer)
-        setCardImagesWhenCardArrayIsPopulated(game.battleFieldSecondPlayer, battleFieldSecondPlayer)
+        setCardImagesWhenCardArrayIsPopulated(game.battleFieldFirstPlayer, battleFieldFirstPlayer, FirstOrLast.first)
+        setCardImagesWhenCardArrayIsPopulated(game.battleFieldSecondPlayer, battleFieldSecondPlayer, FirstOrLast.first)
     }
     
     // Determine battle winner
@@ -87,12 +100,12 @@ class ViewController: UIViewController {
         // Update the images for the heal piles
         if game.winner == "Player 1" {
             
-            setCardImagesWhenCardArrayIsPopulated(game.healPileFirstPlayer, healPileFirstPlayer)
+            setCardImagesWhenCardArrayIsPopulated(game.healPileFirstPlayer, healPileFirstPlayer, FirstOrLast.last)
         }
         
         if game.winner == "Player 2" {
             
-            setCardImagesWhenCardArrayIsPopulated(game.healPileSecondPlayer, healPileSecondPlayer)
+            setCardImagesWhenCardArrayIsPopulated(game.healPileSecondPlayer, healPileSecondPlayer, FirstOrLast.last)
         }
         
         resetDrawPileImageWhenPopulated(game.drawPileFirstPlayer, drawPileFirstPlayer)

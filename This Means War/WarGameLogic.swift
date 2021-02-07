@@ -62,16 +62,48 @@ class WarGameLogic {
         
     }
     
-    func moveCardToBattleField() {
+    func checkIfArrayOfCardsIsEmpty(_ arrayOfCards: [Card]) -> Bool {
+
+        guard arrayOfCards.last != nil else {
+            return true
+        }
+        return false
+    }
+    
+    private func moveCardFromOneArrayToAnother(from: inout [Card], to: inout [Card]) {
+        
+        guard let card = from.first else {
+            return
+        }
+        
+        to.append(card)
+        from.removeFirst()
+    }
+    
+    private func moveAllCardsFromOneArrayToAnother(from: inout [Card], to: inout [Card]) {
+        
+        guard from.first != nil else {
+            return
+        }
+        
+        to.append(contentsOf: from)
+        from.removeAll()
+    }
+    
+    func moveTopCardFromDrawPilesIntoBattleField() {
+        
+        moveCardFromOneArrayToAnother(from: &drawPileFirstPlayer, to: &battleFieldFirstPlayer)
+        moveCardFromOneArrayToAnother(from: &drawPileSecondPlayer, to: &battleFieldSecondPlayer)
+        
+        flipCard()
+    }
+    
+    func moveCardToBattleFieldIfGameNotOver() {
         
         // First, check to see if there is a winner
         if checkGameOver() == false {
-        
-            // Place the top card from players' decks into the corresponding battle positions
-            moveCardFromOneArrayToAnother(from: &drawPileFirstPlayer, to: &battleFieldFirstPlayer)
-            moveCardFromOneArrayToAnother(from: &drawPileSecondPlayer, to: &battleFieldSecondPlayer)
-
-            flipCard()
+            
+            moveTopCardFromDrawPilesIntoBattleField()
             
             // Get the draw pile filled if it is empty after moving a card to the battle field
             keepDrawPilesFull()
@@ -128,39 +160,10 @@ class WarGameLogic {
             }
             else {
                 // TODO: make it so the other cards that are part of the war appear
-                moveCardToBattleField()
+                moveCardToBattleFieldIfGameNotOver()
                 determineBattleWinner()
             }
         }
-    }
-    
-    func checkIfArrayOfCardsIsEmpty(_ arrayOfCards: [Card]) -> Bool {
-
-        guard arrayOfCards.last != nil else {
-            return true
-        }
-        return false
-    }
-    
-    private func moveCardFromOneArrayToAnother(from: inout [Card], to: inout [Card]) {
-        
-        guard let card = from.first else {
-            return
-        }
-        
-        to.append(card)
-        from.removeFirst()
-
-    }
-    
-    private func moveAllCardsFromOneArrayToAnother(from: inout [Card], to: inout [Card]) {
-        
-        guard from.first != nil else {
-            return
-        }
-        
-        to.append(contentsOf: from)
-        from.removeAll()
     }
     
     // Flip cards in Battle Field depending on whether or not players are in state of War
@@ -253,8 +256,8 @@ class WarGameLogic {
             if atWar == true {
 
                 // Move two cards to the Battle Field
-                moveCardToBattleField()
-                moveCardToBattleField()
+                moveCardToBattleFieldIfGameNotOver()
+                moveCardToBattleFieldIfGameNotOver()
                 // Determine a winner or if we are still at War
                 determineBattleWinner()
             }
@@ -262,7 +265,7 @@ class WarGameLogic {
             // If the Battle Field is empty, it is a normal battle
             else if battleFieldIsEmpty == true {
 
-                moveCardToBattleField()
+                moveCardToBattleFieldIfGameNotOver()
                 determineBattleWinner()
             }
         } while atWar == true
