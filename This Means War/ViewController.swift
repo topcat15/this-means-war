@@ -7,12 +7,6 @@
 
 import UIKit
 
-//protocol DeckProtocols {
-//
-//    func moveCardToBattleField()
-//
-//}
-
 class ViewController: UIViewController {
     
     var game = WarGameLogic()
@@ -25,20 +19,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var healPileSecondPlayer: UIImageView!
     @IBOutlet weak var scoreLabelFirstPlayer: UILabel!
     @IBOutlet weak var scoreLabelSecondPlayer: UILabel!
-//    var delegate: DeckProtocols?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.drawPileFirstPlayer.image = UIImage(named: "back")
         self.drawPileSecondPlayer.image = UIImage(named: "back")
         self.battleFieldFirstPlayer.image = UIImage(named: "outline")
         self.battleFieldSecondPlayer.image = UIImage(named: "outline")
         self.healPileFirstPlayer.image = UIImage(named: "outline")
         self.healPileSecondPlayer.image = UIImage(named: "outline")
- //       updateScore()
         self.scoreLabelFirstPlayer.text = String(game.firstPlayerDeck.count)
         self.scoreLabelSecondPlayer.text = String(game.secondPlayerDeck.count)
-
     }
     
     func updateScore() {
@@ -47,41 +39,70 @@ class ViewController: UIViewController {
      scoreLabelSecondPlayer.text = String(game.secondPlayerDeck.count)
     }
     
-    @IBAction func moveTopOfDrawToBattleField(_ sender: Any) {
+    // Reset the image property to "outline" if the [Card] is empty (outlet is the VC equivalent to the model counterpart)
+    func resetCardImagesWhenCardArrayIsEmpty(_ arrayOfCards: [Card], _ outlet: UIImageView) {
         
-        game.battle()
+        if arrayOfCards.count == 0 {
+            
+            outlet.image = UIImage(named: "outline")
+        }
+    }
+    
+    func setCardImagesWhenCardArrayIsPopulated(_ arrayOfCards: [Card], _ outlet: UIImageView) {
+        
+        if game.checkIfArrayOfCardsIsEmpty(arrayOfCards) == false {
+            
+            outlet.image = UIImage(named: "\(arrayOfCards.first!.image)")
+        }
+    }
+    
+    func resetDrawPileImageWhenPopulated(_ drawPile: [Card], _ outlet: UIImageView) {
+        
+        if drawPile.count != 0 {
+            
+            outlet.image = UIImage(named: "back")
+        }
+    }
+    
+    @IBAction func moveTopOfDrawToBattleField(_ sender: Any) {
+         
         game.moveCardToBattleField()
+        
+        // Check to see if we need to reset the image for any empty [Card]
+        resetCardImagesWhenCardArrayIsEmpty(game.healPileFirstPlayer, healPileFirstPlayer)
+        resetCardImagesWhenCardArrayIsEmpty(game.healPileSecondPlayer, healPileSecondPlayer)
+        resetCardImagesWhenCardArrayIsEmpty(game.drawPileFirstPlayer, drawPileFirstPlayer)
+        resetCardImagesWhenCardArrayIsEmpty(game.drawPileSecondPlayer, drawPileSecondPlayer)
+        
+        // Show the cards that are moved into the battle field positions
+        setCardImagesWhenCardArrayIsPopulated(game.battleFieldFirstPlayer, battleFieldFirstPlayer)
+        setCardImagesWhenCardArrayIsPopulated(game.battleFieldSecondPlayer, battleFieldSecondPlayer)
+    }
+    
+    // Determine battle winner
+    @IBAction func battle(_ sender: Any) {
+        
+        game.determineBattleWinner()
+        
+        // Update the images for the heal piles
+        if game.winner == "Player 1" {
+            
+            setCardImagesWhenCardArrayIsPopulated(game.healPileFirstPlayer, healPileFirstPlayer)
+        }
+        
+        if game.winner == "Player 2" {
+            
+            setCardImagesWhenCardArrayIsPopulated(game.healPileSecondPlayer, healPileSecondPlayer)
+        }
+        
+        resetDrawPileImageWhenPopulated(game.drawPileFirstPlayer, drawPileFirstPlayer)
+        resetDrawPileImageWhenPopulated(game.drawPileSecondPlayer, drawPileSecondPlayer)
+        
+        // Reset images for battle field positions to the outline
+        battleFieldFirstPlayer.image = UIImage(named: "outline")
+        battleFieldSecondPlayer.image = UIImage(named: "outline")
         
         // Update the score in the view after the battle
         updateScore()
-        if game.battleFieldFirstPlayer.last != nil {
-         
-//            battleFieldFirstPlayer.image = UIImage(named: game.battleFieldFirstPlayer.last?.image)
-//            
-//            battleFieldSecondPlayer.image = UIImage(named: game.battleFieldFirstPlayer.last?.image)
-            
-        }
-        
-        
     }
-    
-    
-
-    
-    
-    
-    // Draw Pile
-
-        // No cards appear in discard pile when it is empty...another way to say that: only show images of cards if they are in play
-    
-
-        // TODO: Show outline on board where discard pile goes
-
-    // Heal Pile
-
-        // No cards appear in discard pile when it is empty
-
-        // OPTIONAL: show outline on board where discard pile goes
-    
-    
 }

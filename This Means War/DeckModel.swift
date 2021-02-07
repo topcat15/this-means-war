@@ -22,10 +22,10 @@ class DeckOfCards {
     // Create a deck of cards
     private func addCardsToDeck() {
         
-        // Create the cards for each of the 4 suits
+        // Create the cards for each of the 4 suits (club...spade)
         for suit in Suit.allCases {
 
-            // Create a set of cards (2...A)
+            // Create a set of cards (two...ace)
             for value in CardValue.allCases {
 
                 let card = Card(suit: suit, value: value.rawValue)
@@ -41,7 +41,7 @@ class DeckOfCards {
         deck = deck.shuffled()
     }
     
-    // Test: Check the array
+    // TEST: Check the array
     func viewDeck() {
 
         deck.forEach() {
