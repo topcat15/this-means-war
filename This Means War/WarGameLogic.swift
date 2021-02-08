@@ -19,7 +19,7 @@ class WarGameLogic {
     var battleFieldFirstPlayer = [Card]()
     var battleFieldSecondPlayer = [Card]()
     
-    var winner = ""
+    var roundWinner = ""
     
     private var atWar:Bool {
         
@@ -70,6 +70,14 @@ class WarGameLogic {
         return false
     }
     
+    private func checkIfBattleFieldPostionsAreEmpty() -> Bool{
+        
+        guard checkIfArrayOfCardsIsEmpty(battleFieldFirstPlayer) == false && checkIfArrayOfCardsIsEmpty(battleFieldSecondPlayer) == false else {
+            return true
+        }
+        return false
+    }
+    
     private func moveCardFromOneArrayToAnother(from: inout [Card], to: inout [Card]) {
         
         guard let card = from.first else {
@@ -78,16 +86,6 @@ class WarGameLogic {
         
         to.append(card)
         from.removeFirst()
-    }
-    
-    private func moveAllCardsFromOneArrayToAnother(from: inout [Card], to: inout [Card]) {
-        
-        guard from.first != nil else {
-            return
-        }
-        
-        to.append(contentsOf: from)
-        from.removeAll()
     }
     
     func moveTopCardFromDrawPilesIntoBattleField() {
@@ -110,51 +108,54 @@ class WarGameLogic {
         }
     }
     
+    private func moveAllCardsFromOneArrayToAnother(from: inout [Card], to: inout [Card]) {
+        
+        guard from.first != nil else {
+            return
+        }
+        
+        to.append(contentsOf: from)
+        from.removeAll()
+    }
+    
+    private func moveAllCardsFromBattleFieldToWinningHealPile(_ winner: String) {
+        
+        if winner == "Player 1" {
+            
+            roundWinner = "Player 1"
+            // Add cards to player 1's heal pile, with the winning card added second (it will appear on top)
+            moveAllCardsFromOneArrayToAnother(from: &battleFieldSecondPlayer, to: &healPileFirstPlayer)
+            moveAllCardsFromOneArrayToAnother(from: &battleFieldFirstPlayer, to: &healPileFirstPlayer)
+        }
+        else {
+            
+            roundWinner = "Player 2"
+            // Add cards to player 2's heal pile, with the winning card added second (it will appear on top)
+            moveAllCardsFromOneArrayToAnother(from: &battleFieldFirstPlayer, to: &healPileSecondPlayer)
+            moveAllCardsFromOneArrayToAnother(from: &battleFieldSecondPlayer, to: &healPileSecondPlayer)
+        }
+        
+        flipWhenMovedToHealPile()
+        
+        // Logging winner
+        print("\(winner) wins")
+    }
+    
     // Determines where the cards end up during a battle (who wins)
     func determineBattleWinner() {
         
-        // Cards moved into the heal piles will be turned face up no matter what
-        func flipWhenMovedToHealPile() {
-            
-            battleFieldFirstPlayer.forEach {
-                
-                $0.faceUp = true
-            }
-            
-            battleFieldSecondPlayer.forEach {
-                
-                $0.faceUp = true
-            }
-        }
-        
-        if checkIfArrayOfCardsIsEmpty(battleFieldFirstPlayer) == false && checkIfArrayOfCardsIsEmpty(battleFieldSecondPlayer) == false {
+        if checkIfBattleFieldPostionsAreEmpty() == false {
             
             if battleFieldFirstPlayer.last!.value > battleFieldSecondPlayer.last!.value {
-            
-                flipWhenMovedToHealPile()
                 
-                // Add cards to player 1's heal pile, with the winning card added second (it will appear on top)
-                moveAllCardsFromOneArrayToAnother(from: &battleFieldSecondPlayer, to: &healPileFirstPlayer)
-                moveAllCardsFromOneArrayToAnother(from: &battleFieldFirstPlayer, to: &healPileFirstPlayer)
-                
-                winner = "Player 1"
-                
-                print("\(winner) wins")
+                moveAllCardsFromBattleFieldToWinningHealPile("Player 1")
                 
                 // Get the draw pile filled if it is empty after a battle (in case a player has one card left and wins a battle)
                 keepDrawPilesFull()
             }
             else if battleFieldFirstPlayer.last!.value < battleFieldSecondPlayer.last!.value {
                 
-                flipWhenMovedToHealPile()
-                
-                // Add cards to player 2's heal pile, with the winning card added second (it will appear on top)
-                moveAllCardsFromOneArrayToAnother(from: &battleFieldFirstPlayer, to: &healPileSecondPlayer)
-                moveAllCardsFromOneArrayToAnother(from: &battleFieldSecondPlayer, to: &healPileSecondPlayer)
-                
-                winner = "Player 2"
-                
-                print("\(winner) wins")
+                moveAllCardsFromBattleFieldToWinningHealPile("Player 2")
                 
                 keepDrawPilesFull()
             }
@@ -170,8 +171,8 @@ class WarGameLogic {
     private func flipCard() {
         
         let bothBattlePositions = [battleFieldFirstPlayer, battleFieldSecondPlayer]
+        
         // The outer for loop makes sure the same action is taken or both players
-        // TODO: find solution so I don't have to force unwrap bothBattlePositions
         for position in bothBattlePositions {
         
             for (index, _) in position.enumerated() {
@@ -186,6 +187,20 @@ class WarGameLogic {
                     position[index].faceUp = false
                 }
             }
+        }
+    }
+    
+    // Cards moved into the heal piles will be turned face up no matter what
+    func flipWhenMovedToHealPile() {
+        
+        battleFieldFirstPlayer.forEach {
+            
+            $0.faceUp = true
+        }
+        
+        battleFieldSecondPlayer.forEach {
+            
+            $0.faceUp = true
         }
     }
 
