@@ -93,7 +93,11 @@ class WarGameLogic {
         moveCardFromOneArrayToAnother(from: &drawPileFirstPlayer, to: &battleFieldFirstPlayer)
         moveCardFromOneArrayToAnother(from: &drawPileSecondPlayer, to: &battleFieldSecondPlayer)
         
-        flipCard()
+        // Logging battle cards
+        print("Player 1's card is \(battleFieldFirstPlayer[0].value) of \(battleFieldFirstPlayer[0].suit)")
+        print("Player 2's card is \(battleFieldSecondPlayer[0].value) of \(battleFieldSecondPlayer[0].suit)")
+
+        flipCards()
     }
     
     func moveCardToBattleFieldIfGameNotOver() {
@@ -118,21 +122,26 @@ class WarGameLogic {
         from.removeAll()
     }
     
+    // Add cards to winning player's heal pile, with the winning card added second (it will appear on top)
+    func moveAllCardsToHealPile(_ from1: inout [Card], _ from2: inout [Card], _ healPile: inout [Card]) {
+        
+        moveAllCardsFromOneArrayToAnother(from: &from2, to: &healPile)
+        moveAllCardsFromOneArrayToAnother(from: &from1, to: &healPile)
+    }
+    
     private func moveAllCardsFromBattleFieldToWinningHealPile(_ winner: String) {
         
         if winner == "Player 1" {
             
             roundWinner = "Player 1"
-            // Add cards to player 1's heal pile, with the winning card added second (it will appear on top)
-            moveAllCardsFromOneArrayToAnother(from: &battleFieldSecondPlayer, to: &healPileFirstPlayer)
-            moveAllCardsFromOneArrayToAnother(from: &battleFieldFirstPlayer, to: &healPileFirstPlayer)
+            
+            moveAllCardsToHealPile(&battleFieldFirstPlayer, &battleFieldSecondPlayer, &healPileFirstPlayer)
         }
         else {
             
             roundWinner = "Player 2"
-            // Add cards to player 2's heal pile, with the winning card added second (it will appear on top)
-            moveAllCardsFromOneArrayToAnother(from: &battleFieldFirstPlayer, to: &healPileSecondPlayer)
-            moveAllCardsFromOneArrayToAnother(from: &battleFieldSecondPlayer, to: &healPileSecondPlayer)
+
+            moveAllCardsToHealPile(&battleFieldSecondPlayer, &battleFieldFirstPlayer, &healPileSecondPlayer)
         }
         
         flipWhenMovedToHealPile()
@@ -168,7 +177,7 @@ class WarGameLogic {
     }
     
     // Flip cards in Battle Field depending on whether or not players are in state of War
-    private func flipCard() {
+    private func flipCards() {
         
         let bothBattlePositions = [battleFieldFirstPlayer, battleFieldSecondPlayer]
         
