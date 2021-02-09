@@ -131,11 +131,11 @@ class ViewController: UIViewController {
         
         if outlet == battleFieldFirstPlayer {
             
-            UIView.transition(with: battleFieldFirstPlayer, duration: 0.5, options: .transitionFlipFromTop, animations: {self.battleFieldFirstPlayer.image = UIImage(named: "\(self.game.battleFieldFirstPlayer.first!.image)")}, completion: nil)
+            UIView.transition(with: battleFieldFirstPlayer, duration: 0.5, options: .transitionFlipFromTop, animations: {self.battleFieldFirstPlayer.image = UIImage(named: "\(self.game.battleFieldFirstPlayer.first!.imageName)")}, completion: nil)
         }
         else {
             
-            UIView.transition(with: battleFieldSecondPlayer, duration: 0.5, options: .transitionFlipFromBottom, animations: {self.battleFieldSecondPlayer.image = UIImage(named: "\(self.game.battleFieldSecondPlayer.first!.image)")}, completion: nil)
+            UIView.transition(with: battleFieldSecondPlayer, duration: 0.5, options: .transitionFlipFromBottom, animations: {self.battleFieldSecondPlayer.image = UIImage(named: "\(self.game.battleFieldSecondPlayer.first!.imageName)")}, completion: nil)
         }
     }
     
@@ -149,7 +149,7 @@ class ViewController: UIViewController {
             }
             else if firstOrLast == "Last" {
 
-                outlet.image = UIImage(named: "\(arrayOfCards.last!.image)")
+                outlet.image = UIImage(named: "\(arrayOfCards.last!.imageName)")
             }
         }
     }

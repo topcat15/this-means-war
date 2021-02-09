@@ -25,7 +25,7 @@ class Card {
     var suit: Suit
     var value: CardValue.RawValue
     var faceUp = false
-    var image:String {
+    var imageName:String {
         if faceUp == false {
             return "back"
         }
