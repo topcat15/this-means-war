@@ -139,14 +139,17 @@ class ViewController: UIViewController {
         }
     }
     
+    // Set the images for Battle Field poistion or a Heal Pile (using firstOrLast like an undeclared enum)
     func setCardImagesWhenCardArrayIsPopulated(_ arrayOfCards: [Card], _ outlet: UIImageView, _ firstOrLast: String) {
         
         if game.checkIfArrayOfCardsIsEmpty(arrayOfCards) == false {
 
+            // Set the image of a Battle Field position
             if firstOrLast == "First" {
 
                 flipBattleFieldPlayerCardToFront(outlet)
             }
+            // Set the image of a Heal Pile
             else if firstOrLast == "Last" {
 
                 outlet.image = UIImage(named: "\(arrayOfCards.last!.imageName)")
@@ -217,8 +220,8 @@ class ViewController: UIViewController {
         game.determineBattleWinner()
         
         animateMoveBattleCardsToWinningHealPile()
-        // Update the images for the heal piles
         
+        // Update the images for the heal piles
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             
             if self.game.roundWinner == "Player 1" {
