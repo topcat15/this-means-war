@@ -13,7 +13,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var battleFieldFirstPlayer: UIImageView!
     @IBOutlet weak var battleFieldSecondPlayer: UIImageView!
+    @IBOutlet weak var drawPileTopFirstPlayer: UIImageView!
     @IBOutlet weak var drawPileFirstPlayer: UIImageView!
+    @IBOutlet weak var drawPileTopSecondPlayer: UIImageView!
     @IBOutlet weak var drawPileSecondPlayer: UIImageView!
     @IBOutlet weak var healPileFirstPlayer: UIImageView!
     @IBOutlet weak var healPileSecondPlayer: UIImageView!
@@ -23,8 +25,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.drawPileFirstPlayer.image = UIImage(named: "back")
-        self.drawPileSecondPlayer.image = UIImage(named: "back")
+        self.drawPileTopFirstPlayer.image = UIImage(named: "back")
+        self.drawPileTopSecondPlayer.image = UIImage(named: "back")
         self.battleFieldFirstPlayer.image = UIImage(named: "outline")
         self.battleFieldSecondPlayer.image = UIImage(named: "outline")
         self.healPileFirstPlayer.image = UIImage(named: "outline")
@@ -48,11 +50,110 @@ class ViewController: UIViewController {
         }
     }
     
-    func setCardImagesWhenCardArrayIsPopulated(_ arrayOfCards: [Card], _ outlet: UIImageView) {
+    // Check to see if we need to reset the image for any empty [Card]
+    func resetDrawAndHealImages() {
+        
+        resetCardImagesWhenCardArrayIsEmpty(game.healPileFirstPlayer, healPileFirstPlayer)
+        resetCardImagesWhenCardArrayIsEmpty(game.healPileSecondPlayer, healPileSecondPlayer)
+        resetCardImagesWhenCardArrayIsEmpty(game.drawPileFirstPlayer, drawPileFirstPlayer)
+        resetCardImagesWhenCardArrayIsEmpty(game.drawPileSecondPlayer, drawPileSecondPlayer)
+    }
+  
+    // Translate and scale the top card of the draw pile into the battle field
+    func animateMoveDrawPileTopToBattleField() {
+        
+        UIView.animate(withDuration: 0.4, animations: {
+            
+            self.drawPileTopFirstPlayer.center = CGPoint(x: 207, y: 544)
+            self.drawPileTopFirstPlayer.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
+            self.drawPileTopSecondPlayer.center = CGPoint(x: 207, y: 354)
+            self.drawPileTopSecondPlayer.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
+        })
+    }
+    
+    // Translate and scale the images representing the battle field into the winning team's heal pile
+    func animateMoveBattleCardsToWinningHealPile() {
+
+        if game.roundWinner == "Player 1" {
+            
+            UIView.animate(withDuration: 0.75, animations: {
+
+                self.battleFieldFirstPlayer.center = CGPoint(x: 317.5, y: 527)
+                self.battleFieldFirstPlayer.transform = CGAffineTransform(scaleX: 94/169, y: 94/169)
+                self.battleFieldSecondPlayer.center = CGPoint(x: 317.5, y: 527)
+                self.battleFieldSecondPlayer.transform = CGAffineTransform(scaleX: 94/169, y: 94/169)
+            })
+        }
+        
+        else if game.roundWinner == "Player 2" {
+            
+            UIView.animate(withDuration: 0.75, animations: {
+
+                self.battleFieldFirstPlayer.center = CGPoint(x: 16.5, y: -152)
+                self.battleFieldFirstPlayer.transform = CGAffineTransform(scaleX: 94/169, y: 94/169)
+                self.battleFieldSecondPlayer.center = CGPoint(x: 16.5, y: -152)
+                self.battleFieldSecondPlayer.transform = CGAffineTransform(scaleX: 94/169, y: 94/169)
+            })
+        }
+        
+    }
+    
+    // The timing is such that you don't see this occur between setBattleFieldCardImagesToBack() and flipBattleFieldPlayerCardToFront()
+    func moveDrawPileTopsBackToOriginalPostions() {
+        
+        UIView.animate(withDuration: 0, animations: {
+            self.drawPileTopFirstPlayer.center = CGPoint(x: 207, y: 772)
+            self.drawPileTopFirstPlayer.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.drawPileTopSecondPlayer.center = CGPoint(x: 207, y: 138)
+            self.drawPileTopSecondPlayer.transform = CGAffineTransform(scaleX: 1, y: 1)
+        })
+    }
+    
+    func setCardArrayImageToBack(_ outlet: UIImageView) {
+        
+        UIView.transition(with: outlet,
+                          duration: 0,
+                                  options: .transitionCrossDissolve,
+                                  animations: {
+                                outlet.image = UIImage(named: "back")
+                }, completion: nil)
+    }
+    
+    // This sets the image property for the card in the battle field to show the "back" just as (or right after) the top card from the draw pile animates into this position (so you don't see this happen)
+    func setBattleFieldCardImagesToBack() {
+        
+        setCardArrayImageToBack(battleFieldFirstPlayer)
+        setCardArrayImageToBack(battleFieldSecondPlayer)
+    }
+    
+    // Soon after that the card flips to the front (player 2's card flips in the opposite direction)
+    func flipBattleFieldPlayerCardToFront(_ outlet: UIImageView) {
+        
+        if outlet == battleFieldFirstPlayer {
+            
+            UIView.transition(with: battleFieldFirstPlayer, duration: 0.5, options: .transitionFlipFromTop, animations: {self.battleFieldFirstPlayer.image = UIImage(named: "\(self.game.battleFieldFirstPlayer.first!.imageName)")}, completion: nil)
+        }
+        else {
+            
+            UIView.transition(with: battleFieldSecondPlayer, duration: 0.5, options: .transitionFlipFromBottom, animations: {self.battleFieldSecondPlayer.image = UIImage(named: "\(self.game.battleFieldSecondPlayer.first!.imageName)")}, completion: nil)
+        }
+    }
+    
+    // Set the images for Battle Field poistion or a Heal Pile (using firstOrLast like an undeclared enum)
+    func setCardImagesWhenCardArrayIsPopulated(_ arrayOfCards: [Card], _ outlet: UIImageView, _ firstOrLast: String) {
         
         if game.checkIfArrayOfCardsIsEmpty(arrayOfCards) == false {
-            
-            outlet.image = UIImage(named: "\(arrayOfCards.first!.image)")
+
+            // Set the image of a Battle Field position
+            if firstOrLast == "First" {
+
+                flipBattleFieldPlayerCardToFront(outlet)
+            }
+            // Set the image of a Heal Pile
+            else if firstOrLast == "Last" {
+
+                outlet.image = UIImage(named: "\(arrayOfCards.last!.imageName)")
+            }
         }
     }
     
@@ -64,19 +165,53 @@ class ViewController: UIViewController {
         }
     }
     
+    func resetBattleFieldImagesAfterFirstPlayerVictory() {
+
+        // Reset images for battle field positions to the outline
+        self.battleFieldFirstPlayer.image = UIImage(named: "outline")
+        self.battleFieldSecondPlayer.image = UIImage(named: "outline")
+
+        // Move battle field positions back to their original places in the view
+        UIView.animate(withDuration: 0, animations: {
+            self.battleFieldFirstPlayer.transform = CGAffineTransform(translationX: -150.5, y: -253.5)
+            self.battleFieldSecondPlayer.transform = CGAffineTransform(translationX: -150.5, y: -442.5)
+        })
+    }
+    
+    func resetBattleFieldImagesAfterSecondPlayerVictory() {
+        
+        self.battleFieldFirstPlayer.image = UIImage(named: "outline")
+        self.battleFieldSecondPlayer.image = UIImage(named: "outline")
+        
+        UIView.animate(withDuration: 0, animations: {
+            self.battleFieldFirstPlayer.transform = CGAffineTransform(translationX: 150.5, y: 425.5)
+            self.battleFieldSecondPlayer.transform = CGAffineTransform(translationX: 150.5, y: 236.5)
+        })
+    }
+    
     @IBAction func moveTopOfDrawToBattleField(_ sender: Any) {
-         
-        game.moveCardToBattleField()
         
-        // Check to see if we need to reset the image for any empty [Card]
-        resetCardImagesWhenCardArrayIsEmpty(game.healPileFirstPlayer, healPileFirstPlayer)
-        resetCardImagesWhenCardArrayIsEmpty(game.healPileSecondPlayer, healPileSecondPlayer)
-        resetCardImagesWhenCardArrayIsEmpty(game.drawPileFirstPlayer, drawPileFirstPlayer)
-        resetCardImagesWhenCardArrayIsEmpty(game.drawPileSecondPlayer, drawPileSecondPlayer)
-        
+        game.moveCardToBattleFieldIfGameNotOver()
+
+        animateMoveDrawPileTopToBattleField()
+
+        resetDrawAndHealImages()
+
         // Show the cards that are moved into the battle field positions
-        setCardImagesWhenCardArrayIsPopulated(game.battleFieldFirstPlayer, battleFieldFirstPlayer)
-        setCardImagesWhenCardArrayIsPopulated(game.battleFieldSecondPlayer, battleFieldSecondPlayer)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4){
+
+            self.setBattleFieldCardImagesToBack()
+            
+            self.moveDrawPileTopsBackToOriginalPostions()
+        }
+
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            
+            self.setCardImagesWhenCardArrayIsPopulated(self.game.battleFieldFirstPlayer, self.battleFieldFirstPlayer, "First")
+            self.setCardImagesWhenCardArrayIsPopulated(self.game.battleFieldSecondPlayer, self.battleFieldSecondPlayer, "First")
+        }
     }
     
     // Determine battle winner
@@ -84,25 +219,27 @@ class ViewController: UIViewController {
         
         game.determineBattleWinner()
         
+        animateMoveBattleCardsToWinningHealPile()
+        
         // Update the images for the heal piles
-        if game.winner == "Player 1" {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             
-            setCardImagesWhenCardArrayIsPopulated(game.healPileFirstPlayer, healPileFirstPlayer)
-        }
-        
-        if game.winner == "Player 2" {
+            if self.game.roundWinner == "Player 1" {
+                
+                self.setCardImagesWhenCardArrayIsPopulated(self.game.healPileFirstPlayer, self.healPileFirstPlayer, "Last")
+                
+                self.resetBattleFieldImagesAfterFirstPlayerVictory()
+            }
             
-            setCardImagesWhenCardArrayIsPopulated(game.healPileSecondPlayer, healPileSecondPlayer)
+            if self.game.roundWinner == "Player 2" {
+                
+                self.setCardImagesWhenCardArrayIsPopulated(self.game.healPileSecondPlayer, self.healPileSecondPlayer, "Last")
+                
+                self.resetBattleFieldImagesAfterSecondPlayerVictory()
+            }
         }
-        
-        resetDrawPileImageWhenPopulated(game.drawPileFirstPlayer, drawPileFirstPlayer)
-        resetDrawPileImageWhenPopulated(game.drawPileSecondPlayer, drawPileSecondPlayer)
-        
-        // Reset images for battle field positions to the outline
-        battleFieldFirstPlayer.image = UIImage(named: "outline")
-        battleFieldSecondPlayer.image = UIImage(named: "outline")
         
         // Update the score in the view after the battle
-        updateScore()
+        self.updateScore()
     }
 }
