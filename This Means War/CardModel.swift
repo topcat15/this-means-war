@@ -26,12 +26,12 @@ class Card {
     var value: CardValue.RawValue
     var faceUp = false
     var imageName:String {
-        if faceUp == false {
-            return "back"
-        }
-        else {
+        if faceUp {
             // Front Image
             return "\(suit)"+"\(value)"
+        }
+        else {
+            return "back"
         }
     }
     
