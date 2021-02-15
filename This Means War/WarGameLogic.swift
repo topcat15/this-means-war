@@ -202,15 +202,8 @@ class WarGameLogic {
     // Cards moved into the heal piles will be turned face up no matter what
     func flipWhenMovedToHealPile() {
         
-        battleFieldFirstPlayer.forEach {
-            
-            $0.faceUp = true
-        }
-        
-        battleFieldSecondPlayer.forEach {
-            
-            $0.faceUp = true
-        }
+        battleFieldFirstPlayer.forEach {$0.faceUp = true}
+        battleFieldSecondPlayer.forEach {$0.faceUp = true}
     }
 
     // Check draw piles after moving a card, make sure they are not empty
