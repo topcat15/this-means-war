@@ -14,15 +14,15 @@ enum CardValue: Int, CaseIterable {
 }
 
 // Set possible suit values
-enum Suit : CaseIterable {
+enum Suit : String, CaseIterable {
     
     case club, diamond, heart, spade
 }
 
 // A standard playing card
 class Card {
-     
-    var suit: Suit
+    
+    var suit: Suit.RawValue
     var value: CardValue.RawValue
     var faceUp = false
     var imageName:String {
@@ -35,7 +35,7 @@ class Card {
         }
     }
     
-    init (suit: Suit, value: CardValue.RawValue) {
+    init (suit: Suit.RawValue, value: CardValue.RawValue) {
 
         self.value = value
         self.suit = suit

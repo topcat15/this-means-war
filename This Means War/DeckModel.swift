@@ -28,9 +28,9 @@ class DeckOfCards {
             // Create a set of cards (two...ace)
             for value in CardValue.allCases {
 
-                let card = Card(suit: suit, value: value.rawValue)
+                let card = Card(suit: suit.rawValue, value: value.rawValue)
                 card.value = value.rawValue
-                card.suit = suit
+                card.suit = suit.rawValue
                 deck.append(card)
             }
         }
@@ -44,7 +44,7 @@ class DeckOfCards {
     // TEST: Check the array
     func viewDeck() {
 
-        deck.forEach() {
+        deck.forEach {
             print($0.suit, $0.value)
         }
     }
