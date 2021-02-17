@@ -44,7 +44,7 @@ class ViewController: UIViewController {
     // Reset the image property to "outline" if the [Card] is empty (outlet is the VC equivalent to the model counterpart)
     func resetCardImagesWhenCardArrayIsEmpty(_ arrayOfCards: [Card], _ outlet: UIImageView) {
         
-        if arrayOfCards.count == 0 {
+        if arrayOfCards.isEmpty {
             
             outlet.image = UIImage(named: "outline")
         }
@@ -139,7 +139,7 @@ class ViewController: UIViewController {
         }
     }
     
-    // Set the images for Battle Field poistion or a Heal Pile (using firstOrLast like an undeclared enum)
+    // Set the images for Battle Field poistion or a Heal Pile (using firstOrLast like a boolean)
     func setCardImagesWhenCardArrayIsPopulated(_ arrayOfCards: [Card], _ outlet: UIImageView, _ firstOrLast: String) {
         
         if game.checkIfArrayOfCardsIsEmpty(arrayOfCards) == false {
@@ -159,7 +159,7 @@ class ViewController: UIViewController {
     
     func resetDrawPileImageWhenPopulated(_ drawPile: [Card], _ outlet: UIImageView) {
         
-        if drawPile.count != 0 {
+        if drawPile.count > 0 {
             
             outlet.image = UIImage(named: "back")
         }

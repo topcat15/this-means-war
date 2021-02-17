@@ -34,10 +34,9 @@ class WarGameLogic {
     
     private var battleFieldIsEmpty:Bool {
         
-        guard battleFieldFirstPlayer.count == 0 && battleFieldSecondPlayer.count == 0 else {
+        guard battleFieldFirstPlayer.isEmpty && battleFieldSecondPlayer.isEmpty else {
             return false
         }
-        
         return true
     }
     
@@ -64,18 +63,10 @@ class WarGameLogic {
     
     func checkIfArrayOfCardsIsEmpty(_ arrayOfCards: [Card]) -> Bool {
 
-        guard arrayOfCards.last != nil else {
-            return true
+        guard arrayOfCards.isEmpty else {
+            return false
         }
-        return false
-    }
-    
-    private func checkIfBattleFieldPostionsAreEmpty() -> Bool{
-        
-        guard checkIfArrayOfCardsIsEmpty(battleFieldFirstPlayer) == false && checkIfArrayOfCardsIsEmpty(battleFieldSecondPlayer) == false else {
-            return true
-        }
-        return false
+        return true
     }
     
     private func moveCardFromOneArrayToAnother(from: inout [Card], to: inout [Card]) {
@@ -153,7 +144,7 @@ class WarGameLogic {
     // Determines where the cards end up during a battle (who wins)
     func determineBattleWinner() {
         
-        if checkIfBattleFieldPostionsAreEmpty() == false {
+        if battleFieldFirstPlayer.isEmpty == false && battleFieldSecondPlayer.isEmpty == false {
             
             if battleFieldFirstPlayer.last!.value > battleFieldSecondPlayer.last!.value {
                 
