@@ -142,7 +142,7 @@ class ViewController: UIViewController {
     // Set the images for Battle Field poistion or a Heal Pile (using firstOrLast like a boolean)
     func setCardImagesWhenCardArrayIsPopulated(_ arrayOfCards: [Card], _ outlet: UIImageView, _ firstOrLast: String) {
         
-        if game.checkIfArrayOfCardsIsEmpty(arrayOfCards) == false {
+        if arrayOfCards.isEmpty == false {
 
             // Set the image of a Battle Field position
             if firstOrLast == "First" {

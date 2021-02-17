@@ -61,14 +61,6 @@ class WarGameLogic {
         
     }
     
-    func checkIfArrayOfCardsIsEmpty(_ arrayOfCards: [Card]) -> Bool {
-
-        guard arrayOfCards.isEmpty else {
-            return false
-        }
-        return true
-    }
-    
     private func moveCardFromOneArrayToAnother(from: inout [Card], to: inout [Card]) {
         
         guard let card = from.first else {
@@ -203,7 +195,7 @@ class WarGameLogic {
         // If a player's draw pile is empty, shuffle their heal pile and move it to their draw pile
         func moveShuffledHealPileToDrawPile(_ healPile: inout [Card], _ drawPile: inout [Card]) {
             
-            if checkIfArrayOfCardsIsEmpty(drawPile) == true {
+            if drawPile.isEmpty {
                 
                 var shuffledHealPile = healPile.shuffled()
                 
