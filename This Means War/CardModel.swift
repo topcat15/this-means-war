@@ -41,4 +41,3 @@ class Card {
         self.suit = suit
     }
 }
-
