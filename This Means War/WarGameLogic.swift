@@ -218,7 +218,7 @@ class WarGameLogic {
     
     private func checkGameOver() -> Bool {
         
-        guard firstPlayerDeck.count == 0 || secondPlayerDeck.count == 0 else {
+        guard firstPlayerDeck.isEmpty || secondPlayerDeck.isEmpty else {
             return false
         }
         
