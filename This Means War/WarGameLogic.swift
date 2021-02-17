@@ -252,8 +252,9 @@ class WarGameLogic {
         drawPileSecondPlayer.append(contentsOf: beginningSecondPlayerDeck)
         
         // Test: Check that player decks are populated with the correct cards
-        print(firstPlayerDeck.map {($0.suit, $0.value)})
-        print(secondPlayerDeck.map {($0.suit, $0.value)})
+        
+        print(firstPlayerDeck.map {String($0.suit) + String($0.value)})
+        print(secondPlayerDeck.map {String($0.suit) + String($0.value)})
     }
     
     // Battle - control movement of cards, handle War condition
