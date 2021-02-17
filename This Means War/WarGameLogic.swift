@@ -185,8 +185,8 @@ class WarGameLogic {
     // Cards moved into the heal piles will be turned face up no matter what
     func flipWhenMovedToHealPile() {
         
-        battleFieldFirstPlayer.forEach {$0.faceUp = true}
-        battleFieldSecondPlayer.forEach {$0.faceUp = true}
+        battleFieldFirstPlayer.forEach({$0.faceUp = true})
+        battleFieldSecondPlayer.forEach({$0.faceUp = true})
     }
 
     // Check draw piles after moving a card, make sure they are not empty
@@ -221,21 +221,14 @@ class WarGameLogic {
     
     // Deal the deck to two players, one at a time
     private func deal() {
+
+        // 0- and even-indexed cards go to firstPlayer, odd-indexed cards go to secondPlayer
+        drawPileFirstPlayer.append(contentsOf: warDeck!.deck.enumerated().compactMap({
+            tuple in tuple.offset.isMultiple(of: 2) ? tuple.element : nil}))
+        drawPileSecondPlayer.append(contentsOf: warDeck!.deck.enumerated().compactMap({
+            tuple in !tuple.offset.isMultiple(of: 2) ? tuple.element : nil}))
         
-        var beginningFirstPlayerDeck = [Card]()
-        var beginningSecondPlayerDeck = [Card]()
-        
-        for (index, card) in warDeck!.deck.enumerated() {
-            
-            // 0-indexed, so 0- and even-indexed cards go to firstPlayer, odd-indexed cards go to secondPlayer
-            index % 2 == 0 ? beginningFirstPlayerDeck.append(card) : beginningSecondPlayerDeck.append(card)
-        }
-        
-        drawPileFirstPlayer.append(contentsOf: beginningFirstPlayerDeck)
-        drawPileSecondPlayer.append(contentsOf: beginningSecondPlayerDeck)
-        
-        // Test: Check that player decks are populated with the correct cards
-        
+        // Test: Check that player decks are populated with the correct cards    
         print(firstPlayerDeck.map {String($0.suit) + String($0.value)})
         print(secondPlayerDeck.map {String($0.suit) + String($0.value)})
     }
