@@ -60,6 +60,26 @@ class WarGameLogic {
         self.deal()
     }
     
+    // Deal the deck to two players, one at a time
+    func deal() {
+        
+        var beginningFirstPlayerDeck = [Card]()
+        var beginningSecondPlayerDeck = [Card]()
+        
+        for (index, card) in warDeck!.deck.shuffled().enumerated() {
+            
+            // 0-indexed, so 0- and even-indexed cards go to firstPlayer, odd-indexed cards go to secondPlayer
+            index % 2 == 0 ? beginningFirstPlayerDeck.append(card) : beginningSecondPlayerDeck.append(card)
+        }
+        
+        drawPileFirstPlayer.append(contentsOf: beginningFirstPlayerDeck)
+        drawPileSecondPlayer.append(contentsOf: beginningSecondPlayerDeck)
+        
+        // Test: Check that player decks are populated with the correct cards
+        print(firstPlayerDeck.map {String($0.suit) + String($0.value)})
+        print(secondPlayerDeck.map {String($0.suit) + String($0.value)})
+    }
+    
     private func moveCardFromOneArrayToAnother(from: inout [Card], to: inout [Card]) {
         
         guard let card = from.first else {
@@ -216,20 +236,6 @@ class WarGameLogic {
         print("GAME OVER!!!")
         
         return true
-    }
-    
-    // Deal the deck to two players, one at a time
-    private func deal() {
-
-        // 0- and even-indexed cards go to firstPlayer, odd-indexed cards go to secondPlayer
-        drawPileFirstPlayer.append(contentsOf: warDeck!.deck.enumerated().compactMap({
-            tuple in tuple.offset.isMultiple(of: 2) ? tuple.element : nil}))
-        drawPileSecondPlayer.append(contentsOf: warDeck!.deck.enumerated().compactMap({
-            tuple in !tuple.offset.isMultiple(of: 2) ? tuple.element : nil}))
-        
-        // Test: Check that player decks are populated with the correct cards    
-        print(firstPlayerDeck.map {String($0.suit) + String($0.value)})
-        print(secondPlayerDeck.map {String($0.suit) + String($0.value)})
     }
     
     // Battle - control movement of cards, handle War condition
