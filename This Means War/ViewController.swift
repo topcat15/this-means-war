@@ -242,4 +242,8 @@ class ViewController: UIViewController {
         // Update the score in the view after the battle
         self.updateScore()
     }
+    
+    // TODO: show alert when the game is over
+    
+    // TODO: prevennt interaction with the view when the game has been decided
 }

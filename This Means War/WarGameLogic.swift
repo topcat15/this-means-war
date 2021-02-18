@@ -58,7 +58,6 @@ class WarGameLogic {
         
         self.warDeck = DeckOfCards()
         self.deal()
-        
     }
     
     private func moveCardFromOneArrayToAnother(from: inout [Card], to: inout [Card]) {
