@@ -7,27 +7,17 @@
 
 import Foundation
 
-// A standard 52-card deck, shuffled
+// A standard 52-card deck
 class DeckOfCards {
-    
-    // Store the deck
     var deck = [Card]()
     
     init() {
-        
         addCardsToDeck()
-        shuffle()
     }
-
-    // Create a deck of cards
+    
     private func addCardsToDeck() {
-        
-        // Create the cards for each of the 4 suits (club...spade)
         for suit in Suit.allCases {
-
-            // Create a set of cards (two...ace)
             for value in CardValue.allCases {
-
                 let card = Card(suit: suit.rawValue, value: value.rawValue)
                 card.value = value.rawValue
                 card.suit = suit.rawValue
@@ -36,16 +26,8 @@ class DeckOfCards {
         }
     }
     
-    private func shuffle() {
-        
-        deck = deck.shuffled()
-    }
-    
     // TEST: Check the array
     func viewDeck() {
-
-        deck.forEach {
-            print($0.suit, $0.value)
-        }
+        deck.forEach({print($0.suit, $0.value)})
     }
 }
